@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title><%= @page_title || "Music service" %></title>
+	<%= stylesheet_link_tag('application') %>
+	<%= javascript_include_tag('application') %>
+
+
+	<%= render(:partial => "assets/player_script")%>
+</head>
+<body>
+	<div class="container">
+			<%= render(:partial => "assets/myplayer")%>
+			<% if !flash['notice'].blank? %>
+				
+				<div class="message-notice">
+					<p> <%= flash['notice'] %> </p>
+				</div>
+			
+			<% end %>
+
+
+		<%= yield() %>
+		
+	</div>
+
+</body>
+</html>
