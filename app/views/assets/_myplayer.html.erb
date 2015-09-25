@@ -31,7 +31,7 @@
 </table>
 <div id="controller">
 <input type="button" id="previoustrack" value="prev" title="previoustrack"/>	
-<input type="button"  name ="playbutton" value="play" id="notplaying"  title="Play"/>
+<input type="button"  name="playbutton" value="play" id="notplaying"  title="Play"/>
 <input type="button" id="nexttrack" value="next" title="previoustrack"/>
 <input type="button" class="shuffle off" id="shuffle" value="shuffle" title="shuffle media"/>
 <input type="range"   min="0" max="0" step="any" id="seekBar"/>
@@ -44,7 +44,7 @@
 </div>
 
 <script>
-//var play = document.getElementsByName('playbutton')
+var playButton = document.getElementsByName('playbutton')
 var muted = document.getElementById('muteButton')
 var volumeControl = document.getElementById('volumeControl')
 var seekBar = document.getElementById('seekBar')
@@ -54,9 +54,10 @@ var queuesonglist =[];
 var songPlaying
 var pageResult = document.getElementsByName('TrackTitles');
 var nextTrackButton = document.getElementById('nexttrack');
-var prevTrack = document.getElementById('previoustrack');
-var shufflebutton = document.getElementById('shuffle');
-
+var prevTrackButton = document.getElementById('previoustrack');
+var shuffleButton = document.getElementById('shuffle');
+var shuffleSet = false
+var playedTracks = []
 
 
 // setInterval(updateSeekBar,200);
@@ -65,6 +66,8 @@ var shufflebutton = document.getElementById('shuffle');
        pageResult[i].addEventListener("click",updatePlayListAndPlay);
  }
 nextTrackButton.addEventListener("click",nextTrack);
-
+prevTrackButton.addEventListener("click", prevTrack)
+playButton[0].addEventListener("click",playPause);
+shuffleButton.addEventListener("click",toggleShuffle);
 	
 </script>
