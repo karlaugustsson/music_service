@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :search , :only => ["index"]
+  resources :search , :only => ["index" ,"create"]
   
 
   # The priority is based upon order of creation: first created -> highest priority.

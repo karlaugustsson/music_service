@@ -8,11 +8,18 @@ if(!id){
 
 var playButton = document.getElementsByName('playbutton')
 playButton[0].id = "playing"
+
 insertMeta(audio,id)
 songPlaying = id
 audio.load()
-audio.play()
 
+	audio.oncanplay = function(){
+		audio.play();
+	}
+	audio.ondurationchange = function(){
+		updateSeekbarDuration(audio)
+	}
+		
 
 }
 function pause(){
@@ -25,22 +32,24 @@ if(queuesonglist.length == 0){
 	return false
 }
 
-if(isItShuffleTime()){
-	
-	var nextID = randomTrack()
+var nextID = getNextSong()
 
 
+
+if(randomQueueList.length == nextID ){
+
+	if(isItShuffleTime() == true ){
+		play(randomQueueList[0])
+	}else{
+
+	play(queueTracks[0])
+
+
+	}
+pause()	
 }else{
-var nextID = getSongPlaying() + 1
+	play(nextID)
 
-}
-
-if(!queuesonglist[nextID]){
-	console.log(0)
-	play(0)
-	pause()
-}else{
-		play(nextID)
 }
 
 
@@ -48,7 +57,8 @@ if(!queuesonglist[nextID]){
 }
 
 function resumePlayback(audio){
-	audio.play()
+
+		audio.play();
 }
 
 function prevTrack(){
@@ -57,44 +67,81 @@ if(queuesonglist.length == 0){
 
 	return false
 }
-if(isItShuffleTime()){
-	
-	
-		var prevID = playedTracks[playedTracks.length - 2]
-		console.log(prevID)
 
+var nextID = getPrevSong()
 
-
-}else{
-var prevID = getSongPlaying() - 1
-
-}
-
-if(!queuesonglist[prevID]){
-	console.log(0)
-	play(0)
-	pause()
-}else{
-		play(prevID)
-}
-
+	play(nextID)
 }
 
 
-function mutesound(){
+function mutesound(sound){
+var audio = document.getElementById('myplayer');
+audio.muted = true
+sound.className = "mute true"
 
 }
-function unmuteSound(){
+function unmuteSound(sound){
+var audio = document.getElementById('myplayer');
+audio.muted = false
+sound.className = "mute false"
 
 }
 function setVolume(){
+var audio = document.getElementById('myplayer');
+
+audio.volume = this.value
+
+if (audio.volume == 0){
+	
+	this.className = "mute true"
+
+}else{
+	this.className = "mute false"
+}
 
 }
 
 
 
-function getSongPlaying(){
-return parseInt(songPlaying)
+function getNextSong(){
+if(isItShuffleTime()){
+	track = randomQueueList.indexOf(songPlaying)
+	if(randomQueueList.length -1 == track){
+		return randomQueueList.length
+	}
+	track = parseInt(randomQueueList[track + 1]) 
+
+	
+
+}else{
+	
+	track = parseInt(queueTracks[songPlaying]) + 1
+}
+
+
+		return track
+
+}
+function getPrevSong(){
+if(isItShuffleTime()){
+	var track = randomQueueList.indexOf(songPlaying)
+	if(randomQueueList[0] == randomQueueList[track]){
+		newRandomPlayQueue()
+	return randomQueueList[0];
+	}
+
+	track = randomQueueList[track - 1] 
+
+	
+
+}else{
+	
+	var track = parseInt(queueTracks[songPlaying]) - 1
+}
+
+
+		return track
+
 }
 
 function isPlaying(audio){
@@ -115,14 +162,20 @@ function insertMeta(audio,id){
 }
 function newPlayQueue(){
 
-		queuesonglist = songlist
+		queuesonglist = songlist ; 
+		queueTracks = [] ; 
+		i = 0 ; 
+		while (queueTracks.length != queuesonglist.length){
+			queueTracks.push(i++)
+		}
 
 
 
 }
-function updatePlayListAndPlay(){
+function updatePlayListAndPlay(id){
 	newPlayQueue()
-	play(this.id)
+	newRandomPlayQueue()
+	play(id)
 }
 
 function playPause(){
@@ -130,7 +183,6 @@ var audio = document.getElementById('myplayer');
 if (this.id == 'notplaying'){
 
 	setTimeout(function(){
-
 
 			resumePlayback(audio)
 
@@ -151,6 +203,7 @@ if (this.id == 'notplaying'){
 function toggleShuffle(){
 	if(this.className == "shuffle off"){
 		this.className = "shuffle on"
+		newRandomPlayQueue()
 	
 
 	}else{
@@ -162,27 +215,87 @@ function isItShuffleTime(){
 	var shuffleButton = document.getElementById('shuffle');
 	return shuffleButton.className == "shuffle on"
 }
-function randomTrack(){
-while(true){
+
+
+function newRandomPlayQueue(){
+	randomQueueList = [] ; 
+while(queuesonglist.length != randomQueueList.length){
 
 	var number = Math.floor(Math.random() * queuesonglist.length -1) + 1
-		if (playedTracks.indexOf(number) > -1 == false){
-			playedTracks.push(number)
-
-			break;
-		}else if(queuesonglist.length == playedTracks.length){
-			playedTracks = []
-			number = queuesonglist.length + 1
-			break;
+		if (randomQueueList.indexOf(number) > -1 == false){
+			randomQueueList.push(number)
 		}
 
 }
-return number
+
 
 }
 
-function shuffleIsSet(){
-	return shuffleSet
+function toggleMute(){
+
+	if (this.className == "mute false"){
+		mutesound(this)
+
+	}else{
+
+		unmuteSound(this)
+
+	}
+}
+
+function changeSongTimePosition(){
+	var audio = document.getElementById('myplayer');
+	var seekBar = document.getElementById('seekBar')
+	var time = this.value
+	audio.pause
+	audio.currentTime = time;
+
+	audio.onseeked = function() {
+    seekBar.value = (time)
+	}
+
+	
+	audio.oncanplay = function(){
+
+		audio.play();
+	}
+	
+}
+
+function updateSeekbarDuration (audio){
+
+	var trackSearchBar = document.getElementById('seekBar')
+
+	trackSearchBar.max = Math.ceil(audio.seekable.end(0))
+}
+
+function updateSeekBar(){
+	var audio = document.getElementById('myplayer');
+	var seekBar = document.getElementById('seekBar')
+	var play = document.getElementsByName('play')
+
+	var currentTimeSpanTag = document.getElementById('currentTime')
+		currentTimeSpanTag.textContent = convertToMinutesSeconds(audio.currentTime)
+	
+			 seekBar.value = Math.ceil(audio.currentTime)
+	
+		 if (audio.ended && play.id != "play"){
+		 audio.pause()
+		 audio.currentTime = 0 ;
+		 nextTrack()
+
+		 	
+		 }
+	
+}
+
+function convertToMinutesSeconds(time){
+	var minutes = Math.floor(time / 60);
+	var seconds = Math.floor(time - minutes * 60);
+	if(seconds < 10){
+		seconds = "0" + seconds
+	}
+	return minutes + ":" + seconds
 }
 
 

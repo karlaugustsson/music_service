@@ -5,13 +5,16 @@
 	<title><%= @page_title || "Music service" %></title>
 	<%= stylesheet_link_tag('application') %>
 	<%= javascript_include_tag('application') %>
+	
 
 
-	<%= render(:partial => "assets/player_script")%>
 </head>
 <body>
+	<div class= "header">
+		<%= render(:partial => "assets/searchbar")%>
+	</div>
 	<div class="container">
-			<%= render(:partial => "assets/myplayer")%>
+
 			<% if !flash['notice'].blank? %>
 				
 				<div class="message-notice">
@@ -22,8 +25,8 @@
 
 
 		<%= yield() %>
-		
+			
 	</div>
-
+	<%= render(:partial => "assets/myplayer")%>
 </body>
 </html>

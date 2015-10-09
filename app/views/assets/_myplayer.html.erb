@@ -1,48 +1,3 @@
-
-
-	<audio id="myplayer" controls preload="auto" >
-
-	</audio>
-<table class="searchResult">
-	
-	<th>Track</th>
-	<th>Artist</th>
-	<th>Album</th>
-	<% i = -1 %>
-	<% JSON.parse(@search).each do |track|%>
-	<tr>
-
-	<td>
-		<span name="TrackTitles" id="<%= i = i + 1 %>">
-			<%= track['name'] %>
-		</span>
-	</td>
-	
-	<% track['album']['music_groups'].each do |groups|%>
-		<td> <%= groups['name']%> </td>
-	<% end %>
-
-	<td><%= track['album']['name'] %></td>
-	
-	</tr>
-
-
-<% end %>
-</table>
-<div id="controller">
-<input type="button" id="previoustrack" value="prev" title="previoustrack"/>	
-<input type="button"  name="playbutton" value="play" id="notplaying"  title="Play"/>
-<input type="button" id="nexttrack" value="next" title="previoustrack"/>
-<input type="button" class="shuffle off" id="shuffle" value="shuffle" title="shuffle media"/>
-<input type="range"   min="0" max="0" step="any" id="seekBar"/>
-<span id="timer">
- <span id="currentTime"></span>
- <span id="duration"></span>
-</span>
-<input type="button" class ="mute false" id="muteButton" value="mute" title="Mute"/>
-<input type="range" id="volumeControl" min="0" max="1" value ="1" width="20%" height="100" step="any" />
-</div>
-
 <script>
 var playButton = document.getElementsByName('playbutton')
 var muted = document.getElementById('muteButton')
@@ -50,24 +5,27 @@ var volumeControl = document.getElementById('volumeControl')
 var seekBar = document.getElementById('seekBar')
 var player = document.getElementById('myplayer')
 var songlist = <%= h @search.html_safe %>
-var queuesonglist =[];
+var queuesonglist = [] ;
+var randomQueueList = [] ; 
+var queueTracks = [] ; 
 var songPlaying
 var pageResult = document.getElementsByName('TrackTitles');
 var nextTrackButton = document.getElementById('nexttrack');
 var prevTrackButton = document.getElementById('previoustrack');
 var shuffleButton = document.getElementById('shuffle');
 var shuffleSet = false
-var playedTracks = []
 
 
-// setInterval(updateSeekBar,200);
- 
- for(var i=0;i < pageResult.length; i++) {
-       pageResult[i].addEventListener("click",updatePlayListAndPlay);
- }
+player.addEventListener("error",function(){
+
+	    alert("Media data is not available");
+});
+player.addEventListener("timeupdate",updateSeekBar); 
 nextTrackButton.addEventListener("click",nextTrack);
 prevTrackButton.addEventListener("click", prevTrack)
 playButton[0].addEventListener("click",playPause);
 shuffleButton.addEventListener("click",toggleShuffle);
-	
+muted.addEventListener("click" , toggleMute)
+volumeControl.addEventListener("change" , setVolume);
+seekBar.addEventListener("mouseup",changeSongTimePosition);
 </script>

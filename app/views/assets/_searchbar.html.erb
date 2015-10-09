@@ -1,0 +1,7 @@
+<div>
+	<%= form_for(search_index_path , :remote => true ,:method => "GET" ) do |f|%>
+
+	<%= text_field_tag(:search  , params[:search])%>
+	<%= submit_tag(:search) %>
+<% end %>
+</div>

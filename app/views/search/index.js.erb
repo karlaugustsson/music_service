@@ -1,0 +1,29 @@
+var searchResult = <%= h @search.html_safe %>
+var printserach = document.getElementById("search-result").innerHTML = printSearchResult()
+var songlist = <%= h @search.html_safe %>
+function printSearchResult(){
+
+		if (searchResult.length == 0){
+			return "<i>No results were found </i>"
+		}else{
+			return itterateResult()
+		}
+}
+
+function itterateResult(){
+	var html = '<table class="searchResult"><th>Track</th><th>Artist</th><th>Album</th>'; 
+
+for (var i = 0 ;  i < searchResult.length; i++) {
+		html += "<tr><td><span name='TrackTitles' id='" + i +"'"  +" ondblclick='updatePlayListAndPlay("+ i + ")" +"'>" + searchResult[i]['name'] +
+			 "</span></td> " +
+			"<td>" + searchResult[i]["album"]["music_groups"][0]["name"] + "</td>" +
+			"<td>" + searchResult[i]["album"]["name"] + "</td>" +
+
+			"</tr>"
+
+	
+	
+}
+	html += '</table>';
+	return html 
+}
