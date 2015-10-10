@@ -27,7 +27,7 @@ class SearchController < ApplicationController
           end
 
             @search =  @search.to_json
-          puts @search
+    
          
   	
     else

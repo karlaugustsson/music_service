@@ -6,17 +6,26 @@ var audio = document.getElementById('myplayer');
 if(!id){
 	id = 0
 }
+	if(audio.paused == false){
+			audio.pause();
+                audio.currentTime = 0;
+                audio.play();
+
+
+	}
 
 var playButton = document.getElementsByName('playbutton')
 playButton[0].id = "playing"
 
 insertMeta(audio,id)
 songPlaying = id
+
 audio.load()
 
-	audio.oncanplay = function(){
+		
 		audio.play();
-	}
+
+	
 	audio.ondurationchange = function(){
 		updateSeekbarDuration(audio)
 	}
@@ -175,14 +184,7 @@ function newPlayQueue(){
 
 }
 function updatePlayListAndPlay(id){
-	var audio = document.getElementById('myplayer');
-	if(audio.paused == false){
-		audio.oncanplaythrough = function(){
-		
-			audio.currentTime = 0
-			audio.innerHTML = ""
-		}
-	}
+
 	newPlayQueue()
 	newRandomPlayQueue()
 	play(id)
@@ -261,7 +263,7 @@ function changeSongTimePosition(){
 	audio.currentTime = time;
 
 	audio.onseeked = function() {
-    seekBar.value = (time)
+    seekBar.value = time
 	}
 
 	
@@ -290,8 +292,8 @@ function updateSeekBar(){
 			 seekBar.value = Math.ceil(audio.currentTime)
 	
 		 if (audio.ended && play.id != "play"){
-		 audio.pause()
-		 audio.currentTime = 0 ;
+		 audio.innerHTML = ""
+	
 		 nextTrack()
 
 		 	
