@@ -6,7 +6,29 @@ class SearchController < ApplicationController
 
   def index
   	if params[:search] && params[:search].blank? == false
-  		  	@search = open("http://localhost:3000/v1/search_music_groups?search=#{params[:search]}").read
+          @searchTrack = open("http://localhost:3000/v1/search_album_tracks?search=#{params[:search]}").read
+  		  	@searchGroup = open("http://localhost:3000/v1/search_music_groups?search=#{params[:search]}").read
+          @searchAlbum = open("http://localhost:3000/v1/search_albums?search=#{params[:search]}").read
+          
+          @search = []
+          @searchTrack = JSON.parse(@searchTrack)
+          @searchGroup = JSON.parse(@searchGroup)
+          @searchAlbum = JSON.parse(@searchAlbum)
+          @searchTrack.each do |s|
+            @search.push(s)
+          end
+          @searchGroup.each do |s|
+            @search.push(s)
+          end
+
+          @searchAlbum.each do |s|
+            @search.push(s)
+            puts s
+          end
+
+            @search =  @search.to_json
+          puts @search
+         
   	
     else
   		@search = "{}"

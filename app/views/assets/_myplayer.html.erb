@@ -20,6 +20,15 @@ player.addEventListener("error",function(){
 
 	    alert("Media data is not available");
 });
+// player.addEventListener("abort",function(){
+
+// 	    alert("Media data has been aborted");
+// });
+// player.addEventListener("stalled",function(){
+
+// 	    alert("Media data has been suspened");
+// });
+
 player.addEventListener("timeupdate",updateSeekBar); 
 nextTrackButton.addEventListener("click",nextTrack);
 prevTrackButton.addEventListener("click", prevTrack)

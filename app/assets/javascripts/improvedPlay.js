@@ -2,6 +2,7 @@ function play(id){
 var playButton = document.getElementsByName('playbutton')
 var audio = document.getElementById('myplayer');
 
+
 if(!id){
 	id = 0
 }
@@ -162,6 +163,7 @@ function insertMeta(audio,id){
 }
 function newPlayQueue(){
 
+
 		queuesonglist = songlist ; 
 		queueTracks = [] ; 
 		i = 0 ; 
@@ -173,13 +175,21 @@ function newPlayQueue(){
 
 }
 function updatePlayListAndPlay(id){
+	var audio = document.getElementById('myplayer');
+	if(audio.paused == false){
+		audio.oncanplaythrough = function(){
+		
+			audio.currentTime = 0
+			audio.innerHTML = ""
+		}
+	}
 	newPlayQueue()
 	newRandomPlayQueue()
 	play(id)
 }
 
 function playPause(){
-var audio = document.getElementById('myplayer');
+
 if (this.id == 'notplaying'){
 
 	setTimeout(function(){
