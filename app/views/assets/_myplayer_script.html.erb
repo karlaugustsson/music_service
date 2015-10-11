@@ -1,0 +1,32 @@
+<script>
+var playButton = document.getElementsByName('playbutton')
+var muted = document.getElementById('muteButton')
+var volumeControl = document.getElementById('volumeControl')
+var seekBar = document.getElementById('seekBar')
+var player = document.getElementById('myplayer')
+var songlist = <%= h @search.html_safe %>
+var queuesonglist = [] ;
+var randomQueueList = [] ; 
+var queueTracks = [] ; 
+var songPlaying
+var pageResult = document.getElementsByName('TrackTitles');
+var nextTrackButton = document.getElementById('nexttrack');
+var prevTrackButton = document.getElementById('previoustrack');
+var shuffleButton = document.getElementById('shuffle');
+var shuffleSet = false
+
+
+// player.addEventListener("canplaythrough",function(){
+
+// 	    alert("Media data has been suspened");
+// });
+
+player.addEventListener("timeupdate",updateSeekBar); 
+nextTrackButton.addEventListener("click",nextTrack);
+prevTrackButton.addEventListener("click", prevTrack)
+playButton[0].addEventListener("click",playPause);
+shuffleButton.addEventListener("click",toggleShuffle);
+muted.addEventListener("click" , toggleMute)
+volumeControl.addEventListener("change" , setVolume);
+seekBar.addEventListener("mouseup",changeSongTimePosition);
+</script>

@@ -29,7 +29,7 @@ class SearchController < ApplicationController
               @search.each do |song|
               if !@searchremove.include?(song)
                 @searchremove.push(song)
-                puts "aaaa"
+        
               end
             end
        

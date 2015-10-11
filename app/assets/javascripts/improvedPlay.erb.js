@@ -24,8 +24,6 @@ audio.play();
 
 
 
-
-
 playButton[0].id = "playing"
 songPlaying = id
 	
@@ -161,20 +159,57 @@ function isPlaying(audio){
 	{ return !audio.paused; }
 }
 function insertMeta(audio,id){
-
-
+	var imagediv = document.getElementById("albumart")
+	var image = queuesonglist[id]["album"]["full_path_album_art"]
+	var albumName = queuesonglist[id]["album"]["name"]
+	var songTitle = queuesonglist[id]["name"]
 	var artist = queuesonglist[id]["album"]["music_groups"][0]["name"]
-
+	var songinfo = document.getElementById("songinfo")
 	var track = queuesonglist[id]["music_file_file_name"] + new Date().getTime()
-	console.log(track)
 	
 	var type = queuesonglist[id]["music_file_content_type"]
 
 
-		var source = document.getElementById("source");
+	var source = document.getElementById("source");
 
 	source.setAttribute("src",track);
 	source.type = type 
+	if(!document.getElementById("album_art_image_tag")){
+		var imagetag = document.createElement("img");
+		imagetag.id = "album_art_image_tag"
+
+	}else{
+		var imagetag = document.getElementById("album_art_image_tag")
+	}
+
+	if(!document.getElementById("song_title")){
+		var song_title_paragraf = document.createElement("p");
+		song_title_paragraf.id = "song_title"
+		song_title_paragraf.innerHTML = songTitle
+
+	}else{
+		var song_title_paragraf = document.getElementById("song_title")
+		song_title_paragraf.innerHTML = songTitle
+	}
+
+	if(!document.getElementById("album_name")){
+		var album_name_paragraf = document.createElement("p");
+		album_name_paragraf.id = "album_name"
+		album_name_paragraf.innerHTML = albumName
+
+	}else{
+		var album_name_paragraf = document.getElementById("album_name")
+		album_name_paragraf.innerHTML = albumName
+	}
+
+	imagetag.src = image
+	imagetag.alt = albumName
+
+	imagediv.innerHTML = ""
+	imagediv.appendChild(imagetag)
+
+	songinfo.appendChild(song_title_paragraf)
+	songinfo.appendChild(album_name_paragraf)
 
 
 
@@ -305,7 +340,7 @@ function updateSeekBar(){
 
 		 if (audio.ended && play.id != "play"){
 
-		console.log("aaaaa")
+	
 		 nextTrack()
 
 		 	

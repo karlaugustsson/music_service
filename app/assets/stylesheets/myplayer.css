@@ -9,3 +9,7 @@
     -ms-user-select: none;
     user-select: none;
 }
+#album_art_image_tag{
+	height:200px;
+	width:200px;
+}
