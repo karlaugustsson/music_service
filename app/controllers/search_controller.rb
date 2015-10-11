@@ -23,11 +23,18 @@ class SearchController < ApplicationController
 
           @searchAlbum.each do |s|
             @search.push(s)
-            puts s
-          end
 
-            @search =  @search.to_json
-    
+          end
+              @searchremove = []
+              @search.each do |song|
+              if !@searchremove.include?(song)
+                @searchremove.push(song)
+                puts "aaaa"
+              end
+            end
+       
+            @search =  @searchremove.to_json
+            
          
   	
     else
