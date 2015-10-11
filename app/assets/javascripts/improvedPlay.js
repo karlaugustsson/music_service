@@ -3,28 +3,31 @@ var playButton = document.getElementsByName('playbutton')
 var audio = document.getElementById('myplayer');
 
 
-if(!id){
-	id = 0
-}
-	if(audio.paused == false){
-			audio.pause();
-                audio.currentTime = 0;
-                audio.play();
-
-
-	}
+// if(!id){
+// 	id = 0
+// }
 
 var playButton = document.getElementsByName('playbutton')
+var source = document.getElementById("source");
+
+
+insertMeta(audio,id);
+
+audio.load()	
+
+
+
+audio.onloadstart = function(){
+
+audio.play();	
+}
+
+
+
+
+
 playButton[0].id = "playing"
-
-insertMeta(audio,id)
 songPlaying = id
-
-audio.load()
-
-		
-		audio.play();
-
 	
 	audio.ondurationchange = function(){
 		updateSeekbarDuration(audio)
@@ -162,13 +165,19 @@ function insertMeta(audio,id){
 
 	var artist = queuesonglist[id]["album"]["music_groups"][0]["name"]
 
-	var track = queuesonglist[id]["music_file_file_name"]
+	var track = queuesonglist[id]["music_file_file_name"] + new Date().getTime()
+	console.log(track)
 	
 	var type = queuesonglist[id]["music_file_content_type"]
 
-	data = '<source src="' + track + '"'  + ' type="' + type + '" name ="source" />' ; 
 
-	audio.innerHTML = data
+		var source = document.getElementById("source");
+
+	source.setAttribute("src",track);
+	source.type = type 
+
+
+
 }
 function newPlayQueue(){
 
@@ -184,7 +193,9 @@ function newPlayQueue(){
 
 }
 function updatePlayListAndPlay(id){
-
+	var audio = document.getElementById('myplayer');
+	
+	
 	newPlayQueue()
 	newRandomPlayQueue()
 	play(id)
@@ -266,10 +277,11 @@ function changeSongTimePosition(){
     seekBar.value = time
 	}
 
-	
+
 	audio.oncanplay = function(){
 
 		audio.play();
+
 	}
 	
 }
@@ -288,12 +300,12 @@ function updateSeekBar(){
 
 	var currentTimeSpanTag = document.getElementById('currentTime')
 		currentTimeSpanTag.textContent = convertToMinutesSeconds(audio.currentTime)
-	
+
 			 seekBar.value = Math.ceil(audio.currentTime)
-	
+
 		 if (audio.ended && play.id != "play"){
-		 audio.innerHTML = ""
-	
+
+		console.log("aaaaa")
 		 nextTrack()
 
 		 	

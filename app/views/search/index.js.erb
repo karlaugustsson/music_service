@@ -13,8 +13,8 @@ function itterateResult(){
 	var html = '<table class="searchResult"><th>Track</th><th>Artist</th><th>Album</th>'; 
 
 for (var i = 0 ;  i < searchResult.length; i++) {
-		html += "<tr><td><span name='TrackTitles' id='" + i +"'"  +" ondblclick='updatePlayListAndPlay("+ i + ")" +"'>" + searchResult[i]['name'] +
-			 "</span></td> " +
+		html += "<tr><td><p id='" + i +"'"  +" ondblclick='updatePlayListAndPlay("+ i + ")" +"'>" + searchResult[i]['name'] +
+			 "</p></td> " +
 			"<td>" + searchResult[i]["album"]["music_groups"][0]["name"] + "</td>" +
 			"<td>" + searchResult[i]["album"]["name"] + "</td>" +
 

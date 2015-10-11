@@ -1,11 +1,13 @@
 <%= @search %>
 <div id="search-result">	
 </div>
-
+<div id="audio">
+	<audio id="myplayer" controls preload="none" >
+		<source src="" type="" id="source"></source>
+	</audio>	
+</div>
 <div id="controller">
-		<audio id="myplayer" controls preload="metadata" >
 
-	</audio>
 <input type="button" id="previoustrack" value="prev" title="previoustrack"/>	
 <input type="button"  name="playbutton" value="play" id="notplaying"  title="Play"/>
 <input type="button" id="nexttrack" value="next" title="previoustrack"/>
