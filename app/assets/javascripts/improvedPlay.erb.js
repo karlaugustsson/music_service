@@ -237,7 +237,7 @@ function updatePlayListAndPlay(id){
 }
 
 function playPause(){
-
+var audio = document.getElementById('myplayer');
 if (this.id == 'notplaying'){
 
 	setTimeout(function(){
