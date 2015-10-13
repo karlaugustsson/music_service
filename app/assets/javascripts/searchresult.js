@@ -96,9 +96,10 @@ function createNewElement(element){
 function createTableHeaders(classname,header){
 	var table = createNewElement("table")
 		table.className = classname
-	var h = createNewElement("th")
+	
 	for (var i = 0; i < header.length;i++) {
-		h.innerHTML = header[i];
+		var h = createNewElement("th")
+		h.innerHTML += header[i];
 	
 		table.appendChild(h)
 	}
