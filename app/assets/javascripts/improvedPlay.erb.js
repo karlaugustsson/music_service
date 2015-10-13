@@ -162,6 +162,7 @@ function insertMeta(audio,id){
 	var imagediv = document.getElementById("albumart")
 	var image = queuesonglist[id]["album"]["full_path_album_art"]
 	var albumName = queuesonglist[id]["album"]["name"]
+	var albumId = queuesonglist[id]["album"]["id"]
 	var songTitle = queuesonglist[id]["name"]
 	var artist = queuesonglist[id]["album"]["music_groups"][0]["name"]
 	var songinfo = document.getElementById("songinfo")
@@ -185,31 +186,40 @@ function insertMeta(audio,id){
 	if(!document.getElementById("song_title")){
 		var song_title_paragraf = document.createElement("p");
 		song_title_paragraf.id = "song_title"
-		song_title_paragraf.innerHTML = songTitle
+		
 
 	}else{
 		var song_title_paragraf = document.getElementById("song_title")
-		song_title_paragraf.innerHTML = songTitle
-	}
 
-	if(!document.getElementById("album_name")){
-		var album_name_paragraf = document.createElement("p");
-		album_name_paragraf.id = "album_name"
-		album_name_paragraf.innerHTML = albumName
+	}
+	song_title_paragraf.innerHTML = songTitle
+	
+	if(!document.getElementById("artist_name")){
+		var artist_name_paragraf = document.createElement("p");
+		artist_name_paragraf.id = "artist_name"
+
 
 	}else{
-		var album_name_paragraf = document.getElementById("album_name")
-		album_name_paragraf.innerHTML = albumName
+		var artist_name_paragraf = document.getElementById("artist_name")
+		
 	}
 
+	artist_name_paragraf.innerHTML = artist
+	
 	imagetag.src = image
 	imagetag.alt = albumName
-
+	imagelink = document.createElement("a")
+	imagelink.href = "albums/"+ albumId +"/"
+	imagelink.title = albumName
+	attr = document.createAttribute("data-remote")
+	attr.value = "true"
+	imagelink.setAttributeNode(attr)
+	imagelink.appendChild(imagetag)
 	imagediv.innerHTML = ""
-	imagediv.appendChild(imagetag)
+	imagediv.appendChild(imagelink)
 
 	songinfo.appendChild(song_title_paragraf)
-	songinfo.appendChild(album_name_paragraf)
+	songinfo.appendChild(artist_name_paragraf)
 
 
 

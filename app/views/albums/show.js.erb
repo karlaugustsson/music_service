@@ -1,0 +1,15 @@
+
+var searchResult = <%= h @album.html_safe %>
+var container = document.getElementById("container")
+	
+	container.innerHTML = ""
+	var div = document.createElement("div")
+	div.id = "album-result"
+	container.appendChild(div)
+	var printalbum = document.getElementById("album-result")
+	printalbum.appendChild(printSearchResult())
+	songlist = searchResult
+console.log(songlist)
+
+
+

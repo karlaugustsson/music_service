@@ -1,88 +1,14 @@
-var searchResult = <%= h @search.html_safe %>
-var printserach = document.getElementById("search-result")
+	var searchResult = <%= h @search.html_safe %>
+	var container = document.getElementById("container")
+	
+	container.innerHTML = ""
+	var div = document.createElement("div")
+	div.id = "search-result"
+	container.appendChild(div)
+	printserach = document.getElementById("search-result")
 	printserach.innerHTML =""
+ 	songlist = searchResult
 	printserach.appendChild(printSearchResult())
-var songlist = <%= h @search.html_safe %>
-function printSearchResult(){
-
-		if (searchResult.length == 0){
-			var i = document.createElement("i")
-			console.log(i)
-			i.innerHTML = "No results were found"
-			return i
-		}else{
-			return itterateResult()
-		}
-}
-function itterateResult(){
-
-	var table = document.createElement("table")
-	
-	table.className = "searchResult"
-	
-	tableHeader = ["Track" , "Artist" , "Album"]
-	
-	for (var i = 0; i < tableHeader.length;i++) {
-		var header = document.createElement("th")
-		header.innerHTML = tableHeader[i];
-		console.log(i)
-		table.appendChild(header)
-	}
-	
-	
-
-for (var i = 0 ;  i < searchResult.length; i++) {
-		var track = searchResult[i]['name']
-		var artist = searchResult[i]["album"]["music_groups"][0]["name"]
-		var album = searchResult[i]["album"]["name"]
-
-		var tr = document.createElement("tr")
-		
-	
-		
-		var trackparagraf = document.createElement("p")
-			var attr = document.createAttribute("ondblclick")
-			attr.value = "updatePlayListAndPlay(" + i + ")"
-			trackparagraf.setAttributeNode(attr)
-			trackparagraf.innerHTML = track
-		
-		var tdTrack  = appendtd(trackparagraf)
-		
-		var artistlink = createlink(artist,"artist/")
-
-		var tdArtist = appendtd(artistlink)
-		
-		var albumlink = createlink(album,"album/")
-			
-		var tdAlbum = appendtd(albumlink)
-	
-
-			tr.appendChild(tdTrack)
-			tr.appendChild(tdArtist)
-			tr.appendChild(tdAlbum)
 
 
-	table.appendChild(tr);
-	
-}
 
-	return table 
-}
-
-function createlink(subject,path){
-	var dataremotelink = document.createAttribute("data-remote")
-		dataremotelink.value = "true"
-		var subjectlink = document.createElement("a")
-		subjectlink.setAttributeNode(dataremotelink)
-		subjectlink.href = path + subject
-			
-			subjectlink.innerHTML = subject
-
-			return subjectlink
-
-}
-function appendtd(data){
-	var td  = document.createElement("td")
-	td.appendChild(data)
-	return td
-}
