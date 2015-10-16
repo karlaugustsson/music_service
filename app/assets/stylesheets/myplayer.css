@@ -13,3 +13,18 @@
 	height:200px;
 	width:200px;
 }
+.clearfix:before,
+.clearfix:after{
+	content: " ";
+	display: block;
+}
+.clearfix:after{
+	clear: both;
+}
+#album-info{
+	float: left;
+}
+#web-player{
+	position:absolute;
+	bottom :0px;
+	 }

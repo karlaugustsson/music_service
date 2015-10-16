@@ -1,0 +1,218 @@
+function printSearchResult(){
+
+		if (searchResult.length == 0){
+			var i = createNewElement("i","No results were found")
+			return i
+		}else{
+			return itterateSearchResult()
+		}
+}
+function printAlbumResult(){
+
+	return itterateAlbumResult()
+}
+function itterateAlbumResult(){
+	var artist = albumResult[0]["album"]["music_groups"][0]["name"]
+	var album = albumResult[0]["album"]["name"]
+	var albumart = albumResult[0]["album"]["full_path_album_art"]
+	var albumDiv = appendAlbumInfo(artist,album,albumart)
+	var resultdiv = document.getElementById("result")
+
+
+	
+	var table = document.getElementById("list")
+	
+	var tableHeader = ["Track" ,"length"]
+	var table = createTableHeaders(table,tableHeader)
+		
+
+
+
+	for (var i = 0 ;  i < albumResult.length; i++) {
+
+		var track = albumResult[i]['name']
+		
+		
+		
+		var artistId = albumResult[i]["album"]["music_groups"][0]["id"]
+		
+		
+		
+		var albumId = albumResult[i]["album"]["id"]
+
+		var tracklength = albumResult[i]['track_length']
+
+		var trackLengthParagraf = createNewElement("p",tracklength)
+		
+		var trackparagraf = createSongParagraf(i,track)
+
+
+		var artistlink = createlink(artist,"artists/"+ artistId +"/")
+
+		
+		var albumlink = createlink(album,"albums/"+ albumId +"/")	
+		
+
+		var tr = createNewElement("tr")
+
+
+
+		tr.appendChild(appendTo("td",trackparagraf))
+		
+		tr.appendChild(appendTo("td",trackLengthParagraf))
+		
+
+
+
+		table.appendChild(tr);
+
+	};
+
+	
+
+	var tr = createNewElement("tr")
+	var albumInfoString = ""
+	var albumReleaseDate = new Date(albumResult[0]["album"]["release_date"]).getFullYear()
+	for (var i = 0;  i < albumResult[0]["album"]["labels"].length ; i++) {
+		var label = albumResult[0]["album"]["labels"][i]["label_name"]
+		
+		albumInfoString += label + " " 
+		if(i == albumResult[0]["album"]["labels"].length - 1){
+			albumInfoString += " " + albumReleaseDate
+			
+		}
+	
+	};
+
+	var labelsparagraf = createNewElement("p")
+	labelsparagraf.innerHTML = albumInfoString
+	console.log(labelsparagraf)
+	tr.appendChild(appendTo("td",labelsparagraf))
+
+	table.appendChild(tr)
+	
+	searchdiv.innerHTML = table
+
+}
+function itterateSearchResult(){
+
+	
+	var tableHeader = ["Track" , "Artist" , "Album"]
+	
+	var table = createTable("searchResult")
+		table = createTableHeaders(table,tableHeader)
+	
+
+for (var i = 0 ;  i < searchResult.length; i++) {
+		var track = searchResult[i]['name']
+		
+		var artist = searchResult[i]["album"]["music_groups"][0]["name"]
+		
+		var artistId = searchResult[i]["album"]["music_groups"][0]["id"]
+		
+		var album = searchResult[i]["album"]["name"]
+		
+		var albumId = searchResult[i]["album"]["id"]
+
+		var tr = createNewElement("tr")
+
+		var trackparagraf = createSongParagraf(i,track)
+	
+
+		var artistlink = createlink(artist,"artists/"+ artistId +"/")
+
+		
+		var albumlink = createlink(album,"albums/"+ albumId +"/")
+			
+	
+		tr.appendChild(appendTo("td",trackparagraf))
+		
+		tr.appendChild(appendTo("td",artistlink))
+		
+		tr.appendChild(appendTo("td",albumlink))
+
+
+		table.appendChild(tr);
+	
+}
+
+	return table 
+}
+
+function createlink(subject,path){
+	var subjectlink = createNewElement("a",subject)
+	var dataremotelink = appendAttribute(subjectlink,"data-remote","true")
+		subjectlink.href = path 
+
+	return subjectlink
+
+}
+function createSongParagraf(id,song){
+	var p = createNewElement("p",song)
+
+	var attribute = appendAttribute(p,"ondblclick","updatePlayListAndPlay(" + id + ")")
+	return p
+}
+function appendAlbumInfo(artist,album,albumart){
+	var albumInfoDiv = document.getElementById("album-info")
+	var albumart = createImageTag(albumart,album)
+		albumart.height = 200
+		albumInfoDiv.appendChild(albumart)
+	return albumInfoDiv
+}
+function appendTo(type,data){
+	var element  = createNewElement(type)
+		element.appendChild(data)
+	return element
+}
+function createNewElement(element,value){
+	var newElement = document.createElement(element)
+	
+	if(value === undefined){
+		newElement.innerHTML = ""
+	}else{
+		newElement.innerHTML = value
+	}
+	return newElement
+	
+}
+function createTable(classname){
+	var table = createNewElement("table")
+	table.className = classname
+	return table
+
+}
+function createTableHeaders(table,header){
+	
+		
+	
+	for (var i = 0; i < header.length;i++) {
+		var h = createNewElement("th")
+		h.innerHTML += header[i];
+	
+		table.appendChild(h)
+	}
+
+	return table
+}
+
+
+function appendAttribute(subject,attribute,value){
+	var newAttribute = document.createAttribute(attribute)
+	newAttribute.value = value
+
+	return subject.setAttributeNode(newAttribute)
+
+}
+function createImageTag(source,text,a){
+
+	var img = createNewElement("img")
+	img.src = source
+	img.alt = text
+	if(a === undefined){
+		
+		return img
+	}
+
+	return a.appendChild(img)
+}
