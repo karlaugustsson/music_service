@@ -11,8 +11,82 @@ function printAlbumResult(){
 
 	return itterateAlbumResult()
 }
-function itterateAlbumResult(){
-	var artist = albumResult[0]["album"]["music_groups"][0]["name"]
+function printArtistResult(){
+	var albums = []
+
+for (var i =0 ; i < artistResult.length; i++) {
+	
+		
+	if(albums.indexOf(artistResult[i]["album"]["id"]) == -1){
+		albums.push(artistResult[i]["album"]["id"])
+	}
+}
+
+	for (var i =0 ; i < albums.length; i++) {
+			var table = createNewElement("table")
+			var albumdiv = createNewElement("div")
+			albumdiv.className = "album"
+
+			var tableHeaders = ["#" ,"name" , "length"]
+			var result = document.getElementById("result")
+			table = createTableHeaders(table,tableHeaders)
+			table.id = "list"
+			
+		
+				var album  = artistResult.filter(function(obj){
+		
+						return obj["album"]["id"] == albums[i]
+					 
+				});
+			
+				
+				var albumInfo = createNewElement("div")
+					albumInfo.className = "albuminfo"
+
+					albumdiv.appendChild(albumInfo)
+					var albumYear = new Date(album[0]["album"]["release_date"]).getFullYear()
+				
+					var albumlink = createlink(album[0]["album"]["name"] ,"albums/"+ album[0]["album"]["id"] +"/")
+					var albumartLink = createlink("" ,"albums/"+ album[0]["album"]["id"] +"/")
+					var albumart = createImageTag(album[0]["album"]["full_path_album_art"],album[0]["album"]["name"],albumartLink)
+
+					var yearSpan = createNewElement("span" , "("+  albumYear +")")
+					
+					albumInfo.appendChild(albumart)
+					albumInfo.appendChild(albumlink)
+					albumInfo.appendChild(yearSpan)
+					
+					
+
+			
+		for (var y = i ; y < artistResult.length; y++) {
+	
+			
+
+			if(albums[i] == artistResult[y]["album"]["id"]){
+				var tr = createNewElement("tr")
+				var trackparagraf = createSongParagraf(y,artistResult[y]["name"])
+				
+				var tracklength = createNewElement("p",artistResult[y]["track_length"])
+				var position = createNewElement("p",artistResult[y]["position"])
+				tr.appendChild(appendTo("td",position))
+				tr.appendChild(appendTo("td",trackparagraf))
+				tr.appendChild(appendTo("td",tracklength))
+
+				table.appendChild(tr)
+	
+			}
+
+		
+		};
+		result.appendChild(albumdiv)
+	
+		albumdiv.appendChild(table)
+
+	};
+}
+	function itterateAlbumResult(){
+	var artist = albumResult[0]["album"]["music_groups"][0]
 	var album = albumResult[0]["album"]["name"]
 	var albumart = albumResult[0]["album"]["full_path_album_art"]
 	var albumDiv = appendAlbumInfo(artist,album,albumart)
@@ -48,9 +122,7 @@ function itterateAlbumResult(){
 
 
 		var artistlink = createlink(artist,"artists/"+ artistId +"/")
-
-		
-		var albumlink = createlink(album,"albums/"+ albumId +"/")	
+	
 		
 
 		var tr = createNewElement("tr")
@@ -157,7 +229,13 @@ function appendAlbumInfo(artist,album,albumart){
 	var albumInfoDiv = document.getElementById("album-info")
 	var albumart = createImageTag(albumart,album)
 		albumart.height = 200
+		var artistparagraf = createNewElement("p","Artist:")
+		artistparagraf.appendChild(createlink(artist["name"],"artists/"+artist["id"]+"/"))
+	 
+		var albumparagraf = createNewElement("p","Album:" + album)
 		albumInfoDiv.appendChild(albumart)
+		albumInfoDiv.appendChild(artistparagraf)
+		albumInfoDiv.appendChild(albumparagraf)
 	return albumInfoDiv
 }
 function appendTo(type,data){
@@ -210,9 +288,10 @@ function createImageTag(source,text,a){
 	img.src = source
 	img.alt = text
 	if(a === undefined){
-		
 		return img
 	}
-
-	return a.appendChild(img)
+	a.title = text
+	a.appendChild(img)
+	
+	return a
 }

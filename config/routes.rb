@@ -1,8 +1,13 @@
 Rails.application.routes.draw do
+  get 'artists/show'
+
+  get 'artists/index'
+
   get 'albums/index'
 
   resources :search , :only => ["index"]
   resources :albums , :only => ["index","show"]
+  resources :artists , :only => ["index","show"]
   
 
   # The priority is based upon order of creation: first created -> highest priority.

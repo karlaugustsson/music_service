@@ -1,0 +1,37 @@
+var artistResult = <%= h @artist.html_safe %>
+	songlist = artistResult
+
+	songlist.sort(function(o1,o2){
+		if((new Date(o1.album.release_date).getFullYear() - new Date(o2.album.release_date).getFullYear()) < 0 ){
+		
+			return 1
+
+		}else if((new Date(o1.album.release_date).getFullYear() - new Date(o2.album.release_date).getFullYear()) > 0){
+
+			return  -1
+		}
+		else{
+			
+			if(new Date(o1.album.release_date).getMonth() - new Date(o2.album.release_date).getMonth() < 0){
+				
+				return 1
+			}else if(new Date(o1.album.release_date).getMonth() - new Date(o2.album.release_date).getMonth() > 0){
+
+				return -1
+			}else{
+				return 0
+			}
+			
+		}
+
+	})
+
+var container = document.getElementById("container")
+	container.innerHTML = ""
+	container.innerHTML = "<%= j render 'show' %>"
+
+	printArtistResult()
+	
+
+
+

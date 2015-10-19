@@ -3,7 +3,7 @@ var albumResult = <%= h @album.html_safe %>
 	songlist = albumResult
 var container = document.getElementById("container")
 	container.innerHTML = ""
-	container.innerHTML = '<div id="album-list" class="clearfix"><div id="album-info"></div><div id="result"><table id="list"></table></div></div>'
+	container.innerHTML = "<%= j render 'show' %>"
 
 	printAlbumResult()
 	
