@@ -25,12 +25,17 @@ for (var i =0 ; i < artistResult.length; i++) {
 	for (var i =0 ; i < albums.length; i++) {
 			var table = createNewElement("table")
 			var albumdiv = createNewElement("div")
-			albumdiv.className = "album"
+				albumdiv.className = "col-md-12"
+			var row = createNewElement("div")
+			row.className="row"
+			row.appendChild(albumdiv)
+			
 
 			var tableHeaders = ["#" ,"name" , "length"]
 			var result = document.getElementById("result")
 			table = createTableHeaders(table,tableHeaders)
 			table.id = "list"
+			table.className = "table zebra-striped table-condensed table-hover"
 			
 		
 				var album  = artistResult.filter(function(obj){
@@ -79,7 +84,7 @@ for (var i =0 ; i < artistResult.length; i++) {
 
 		
 		};
-		result.appendChild(albumdiv)
+		result.appendChild(row)
 	
 		albumdiv.appendChild(table)
 
@@ -171,7 +176,7 @@ function itterateSearchResult(){
 	
 	var tableHeader = ["Track" , "Artist" , "Album"]
 	
-	var table = createTable("searchResult")
+	var table = document.getElementById("searchResult")
 		table = createTableHeaders(table,tableHeader)
 	
 
@@ -253,12 +258,6 @@ function createNewElement(element,value){
 	}
 	return newElement
 	
-}
-function createTable(classname){
-	var table = createNewElement("table")
-	table.className = classname
-	return table
-
 }
 function createTableHeaders(table,header){
 	

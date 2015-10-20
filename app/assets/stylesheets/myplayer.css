@@ -1,41 +1,30 @@
-/*audio{
-	display:none;
-}*/
-.searchResult{
-	    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-}
-#album_art_image_tag{
-	height:200px;
-	width:200px;
-}
-.clearfix:before,
-.clearfix:after{
-	content: " ";
-	display: block;
-}
-.clearfix:after{
-	clear: both;
-}
+
+/*webplayer*/
 #album-info{
-	float: left;
+  float: left;
 }
 #web-player{
-	position:absolute;
-	bottom :0px;
+  position:absolute;
+  bottom :0px;
+  border: 1px solid #9C9C9C;
+  width:200px;
 
-	 }
-.albuminfo img {
-	 	height:100px;
-	 	width:100px;
 }
-/*webplayer*/
+.shuffle.on{
+  color:orange;
+}
+.shuffle.off{
+color:black;
+}
+#album_art_image_tag , #albumart {
+  height:200px;
+  width:200px;
+}
+#songinfo{
+  width: 200px;
+}
 #controller{
-	background-color: #FFFFCC;
+
 }
 
 #songdata{
@@ -46,11 +35,7 @@
 	background-color: #2B2929;
 	color:white;
 }
-#web-player{
-	background-color: #FFFFCC;
-	border: 1px solid #9C9C9C;
-	width:200px;
-}
+
 #web-player input[type="button"]{
 	border:none;
 	background-color: transparent;

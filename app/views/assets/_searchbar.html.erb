@@ -1,7 +1,9 @@
-<div>
-	<%= form_for(search_index_path , :remote => true ,:method => "GET" ) do |f|%>
 
-	<%= text_field_tag(:search )%>
-	<%= submit_tag(:search) %>
+	<%= form_for(search_index_path , :remote => true ,:method => "GET" ,:html => {:class => "navbar-form navbar-left" ,
+	 :role => "search"} ) do |f|%>
+	<div class="form-group">
+	<%= text_field_tag(:search ,nil, :class => "form-control" ,:id => "searchField", :placeholder => "Search"  )%>
+	</div>
+	<%= submit_tag(:search , :class => "btn btn-default" ) %>
 <% end %>
 </div>

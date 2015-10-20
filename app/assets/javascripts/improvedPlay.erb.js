@@ -2,11 +2,6 @@ function play(id){
 var playButton = document.getElementsByName('playbutton')
 var audio = document.getElementById('myplayer');
 
-
-// if(!id){
-// 	id = 0
-// }
-
 var playButton = document.getElementsByName('playbutton')
 var source = document.getElementById("source");
 
@@ -15,16 +10,12 @@ insertMeta(audio,id);
 
 audio.load()	
 
-
-
-audio.onloadstart = function(){
-
 audio.play();	
-}
 
-
-
+var playButtonIcon = document.getElementById("playIcon")
 playButton[0].id = "playing"
+playButtonIcon.className ="glyphicon glyphicon-pause"
+
 songPlaying = id
 	
 	audio.ondurationchange = function(){
@@ -57,7 +48,8 @@ if(randomQueueList.length == nextID ){
 
 
 	}
-pause()	
+
+playPause()
 }else{
 	play(nextID)
 
@@ -80,34 +72,50 @@ if(queuesonglist.length == 0){
 }
 
 var nextID = getPrevSong()
+	if(nextID == -1){
+		if(isItShuffleTime() == true ){
+			play(randomQueueList[0])
+		}else{
 
-	play(nextID)
+		play(queueTracks[0])
+
+	}
+	
+	}else{
+		play(nextID)
+	}
+
 }
 
 
 function mutesound(sound){
 var audio = document.getElementById('myplayer');
+var muteIcon = document.getElementById("muteIcon")
 audio.muted = true
 sound.className = "mute true"
-
+muteIcon.className = "glyphicon glyphicon-volume-off"
 }
 function unmuteSound(sound){
+var muteIcon = document.getElementById("muteIcon")
 var audio = document.getElementById('myplayer');
 audio.muted = false
 sound.className = "mute false"
+muteIcon.className = "glyphicon glyphicon-volume-up"
 
 }
 function setVolume(){
 var audio = document.getElementById('myplayer');
-
+var muteIcon = document.getElementById("muteIcon")
 audio.volume = this.value
 
 if (audio.volume == 0){
 	
 	this.className = "mute true"
+	muteIcon.className = "glyphicon glyphicon-volume-off"
 
 }else{
 	this.className = "mute false"
+	muteIcon.className = "glyphicon glyphicon-volume-up"
 }
 
 }
@@ -248,22 +256,23 @@ function updatePlayListAndPlay(id){
 
 function playPause(){
 var audio = document.getElementById('myplayer');
-if (this.id == 'notplaying'){
+var playButtonIcon = document.getElementById("playIcon")
+var pausePlayButton = document.getElementsByName("playbutton")[0]
 
-	setTimeout(function(){
+if (pausePlayButton.id == 'notplaying'){
 
-			resumePlayback(audio)
+	resumePlayback(audio)
+	playButtonIcon.className ="glyphicon glyphicon-pause"
 
-
-	}, 200);
-	this.id = "playing"
+	pausePlayButton.id = "playing"
 
 }else{
-	setTimeout(function(){
-		pause()
-	}, 200);
 
-	this.id = "notplaying"
+	pause()
+
+
+	pausePlayButton.id = "notplaying"
+	playButtonIcon.className ="glyphicon glyphicon-play"
 }
 
 }

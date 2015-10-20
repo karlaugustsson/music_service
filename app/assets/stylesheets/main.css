@@ -1,0 +1,50 @@
+html, body{
+  height:100%;
+}
+.clearfix:before,
+.clearfix:after{
+	content: " ";
+	display: block;
+}
+.clearfix:after{
+	clear: both;
+}
+#container{
+	min-height: 80%;
+	width:85%;
+
+	float: right;
+	margin:0px;
+	padding: 20px;
+}
+#sidebar{
+
+	height: 90%;
+	min-width:200px;
+    width: auto;
+    position: relative;
+    float: left;
+}
+
+.navbar-inverse{
+	margin-bottom: 0px;
+}
+
+
+
+
+/*albumview img*/
+.albuminfo img {
+	 	height:100px;
+	 	width:100px;
+}
+
+.searchResult{
+	    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: pointer;
+}

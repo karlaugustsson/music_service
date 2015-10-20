@@ -13,17 +13,32 @@
 		</div>
 	</div>
 	<div id="controller">
+		
+		<button id="previoustrack" title="previoustrack" aria-label="Previous track">
+		<span class="glyphicon glyphicon-backward" aria-hidden="true"></span>
+		</button>
+			
+		<button  name="playbutton" id="notplaying"  title="Play" aria-label="Play Music">
+		<span class="glyphicon glyphicon-play" id="playIcon" aria-hidden="true"></span>
 
-		<input type="button" id="previoustrack" value="prev" title="previoustrack"/>	
-		<input type="button"  name="playbutton" value="play" id="notplaying"  title="Play"/>
-		<input type="button" id="nexttrack" value="next" title="previoustrack"/>
-		<input type="button" class="shuffle off" id="shuffle" value="shuffle" title="shuffle media"/>
+		</button>
+		
+		<button id="nexttrack" title="previoustrack" aria-label="Next track">
+		<span class="glyphicon glyphicon-forward" aria-hidden="true"></span>
+		</button>
+		
+		<button class="shuffle off" id="shuffle" title="shuffle media">
+		<span class="glyphicon glyphicon-random" aria-hidden="true"></span>
+
+		</button>
 		<input type="range"   min="0" max="500"  value="0" step="any" id="seekBar"/>
 		<div id="timer">
 		 <p id="currentTime">0:00</p>
 		
 		</div>
-		<input type="button" class ="mute false" id="muteButton" value="mute" title="Mute"/>
+		<button class ="mute false" id="muteButton" title="Mute">
+		<span class="glyphicon glyphicon-volume-up" id="muteIcon" aria-hidden="true"></span>
+		</button>
 		<input type="range" id="volumeControl" min="0" max="1" value="1" width="20%" height="100" step="any" />
 
 	</div>

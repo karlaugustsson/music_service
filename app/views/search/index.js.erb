@@ -1,14 +1,15 @@
 	var searchResult = <%= h @search.html_safe %>
 	var container = document.getElementById("container")
-	
+	var searchField = document.getElementById("searchField")
+	searchField.value = ""
 	container.innerHTML = ""
-	var div = document.createElement("div")
-	div.id = "search-result"
-	container.appendChild(div)
-	printserach = document.getElementById("search-result")
-	printserach.innerHTML =""
+	container.innerHTML = "<%= j render 'index' %>"
+	printsearch = document.getElementById("search-result")
+
  	songlist = searchResult
-	printserach.appendChild(printSearchResult())
+ 	
+ 	console.log("aaaa")
+	printsearch.appendChild(printSearchResult())
 
 
 
