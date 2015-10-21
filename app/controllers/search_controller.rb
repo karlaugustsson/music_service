@@ -3,6 +3,7 @@ require 'json'
 class SearchController < ApplicationController
 	layout "music"
 	skip_before_filter :verify_authenticity_token
+  before_action :redirect_if_not_logged_in
 
   def index
   	if params[:search] && params[:search].blank? == false

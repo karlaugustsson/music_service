@@ -1,0 +1,22 @@
+<% if object && object.errors.size > 0 %>
+
+	<div class="alert alert-danger" role="alert">
+		 <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+ 		 <span class="sr-only">Error:</span>
+		<%= pluralize(object.errors.size , "Error")%>
+
+		These errors prohibited this record from being saved
+
+		<ul>
+		
+			<% object.errors.full_messages.each do |m| %>
+			
+				<li><%= m %></li>
+		
+				<% end %>
+
+		</ul>
+
+	</div>
+
+<% end %>	

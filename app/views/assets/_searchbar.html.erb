@@ -1,9 +1,12 @@
 
-	<%= form_for(search_index_path , :remote => true ,:method => "GET" ,:html => {:class => "navbar-form navbar-left" ,
-	 :role => "search"} ) do |f|%>
+	<%= form_for("search" ,:url => {:controller => "search" , :action => "index" },:method => "GET",
+		:html => {:class => "navbar-form navbar-left", :id => "searchForm",:role => "search" , :remote => true } ) do |f|%>
 	<div class="form-group">
-	<%= text_field_tag(:search ,nil, :class => "form-control" ,:id => "searchField", :placeholder => "Search"  )%>
+	<%= text_field_tag(:search ,nil, :class => "form-control" ,:id => "searchField" , :placeholder => "Search"  )%>
 	</div>
-	<%= submit_tag(:search , :class => "btn btn-default" ) %>
+	<%= submit_tag(:search , :class => "btn btn-default", :onClick => "return returnFalseIfEmpty()" ) %>
 <% end %>
-</div>
+
+<script>
+
+</script>

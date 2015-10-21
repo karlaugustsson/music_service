@@ -1,6 +1,16 @@
+
+function returnFalseIfEmpty(){
+var searchField = document.getElementById("searchField")
+if(searchField.value.length == 0){
+	return false
+}else{
+	return true
+}
+
+}
 function printSearchResult(){
 
-		if (searchResult.length == 0){
+		if (searchResult.length == undefined || searchResult.length == 0){
 			var i = createNewElement("i","No results were found")
 			return i
 		}else{
@@ -173,7 +183,7 @@ for (var i =0 ; i < artistResult.length; i++) {
 }
 function itterateSearchResult(){
 
-	
+	console.log(searchResult.length)
 	var tableHeader = ["Track" , "Artist" , "Album"]
 	
 	var table = document.getElementById("searchResult")

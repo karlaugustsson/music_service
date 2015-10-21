@@ -1,14 +1,18 @@
 Rails.application.routes.draw do
-  get 'artists/show'
-
-  get 'artists/index'
-
-  get 'albums/index'
-
+  get 'login/' => "login#index"
+   get 'main/' => "public#main"
+  post 'login/attempt_login' => "login#attempt_login"
+  get 'logout' => "login#logout"
+  get 'register' => "users#new"
+  root 'public#index'
   resources :search , :only => ["index"]
   resources :albums , :only => ["index","show"]
   resources :artists , :only => ["index","show"]
-  
+  resources :users do 
+    member do
+     get :delete
+    end
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

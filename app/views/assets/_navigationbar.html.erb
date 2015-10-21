@@ -6,15 +6,40 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>                        
       </button>
-      <a class="navbar-brand" href="#">WebSiteName</a>
-      <%= render(:partial => "assets/searchbar")%>
-      
+      <a class="navbar-brand" href=<%= @onlineUser ? '#' : '/' %> >WebSiteName</a>
+      <%if @onlineUser%>
+          <%= render(:partial => "assets/searchbar")%>
+      <%end%>
+      </div>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+        <li>
+          <%if @onlineUser %>
+              <%= link_to(user_path(@onlineUser.id),:remote=>true) do %>
+              <span class="glyphicon glyphicon-user"></span>Signed in as <%= @onlineUser.email %>
+              <%end%>
+              </li>
+              <li>
+              <%= link_to ("/logout"  ) do %>
+              <span class="glyphicon glyphicon-log-in"></span> Logout
+              <%end%>
+              </li> 
+
+         <%else%>
+              <%= link_to ("/register" ) do %>
+              <span class="glyphicon glyphicon-user"></span>Register 
+              <%end%>
+              </li>
+              <li>
+              <%= link_to ("/login"  ) do %>
+              <span class="glyphicon glyphicon-log-in"></span> Login
+              <%end%>
+              </li> 
+        <%end%>
+        
+
+
+        <li><a href="#"></a></li>
       </ul>
     </div>
-
-   
   </div>
 </nav>

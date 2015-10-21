@@ -1,4 +1,5 @@
 class AlbumsController < ApplicationController
+	before_action :redirect_if_not_logged_in
   layout "music"
   def index
   end

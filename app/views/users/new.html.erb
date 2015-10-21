@@ -1,0 +1,9 @@
+<% @page_title = "New Admin User" %>
+<%= error_messages_for(@user) %>
+
+
+<%= form_for(@user) do |f| %>
+
+	<%= render(:partial => "form" , :locals => {:f => f}) %>
+	<%= submit_tag("Create new User", :class => "btn btn-primary") %>
+<% end %>
