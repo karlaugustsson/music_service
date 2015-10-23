@@ -173,7 +173,7 @@ for (var i =0 ; i < artistResult.length; i++) {
 
 	var labelsparagraf = createNewElement("p")
 	labelsparagraf.innerHTML = albumInfoString
-	console.log(labelsparagraf)
+
 	tr.appendChild(appendTo("td",labelsparagraf))
 
 	table.appendChild(tr)
@@ -183,7 +183,7 @@ for (var i =0 ; i < artistResult.length; i++) {
 }
 function itterateSearchResult(){
 
-	console.log(searchResult.length)
+	
 	var tableHeader = ["Track" , "Artist" , "Album"]
 	
 	var table = document.getElementById("searchResult")

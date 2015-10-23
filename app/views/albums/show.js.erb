@@ -1,9 +1,9 @@
 
 var albumResult = <%= h @album.html_safe %>
 	songlist = albumResult
-var container = document.getElementById("container")
-	container.innerHTML = ""
-	container.innerHTML = "<%= j render 'show' %>"
+var main = document.getElementById("main")
+	main.innerHTML = ""
+	main.innerHTML = "<%= j render 'show' %>"
 
 	printAlbumResult()
 	

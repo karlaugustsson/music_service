@@ -1,6 +1,24 @@
 html, body{
   height:100%;
 }
+.collapse{
+	display: block;
+}
+.hundred{
+	height: 100%;
+}
+.row-hundred{
+	height: 100%
+}
+.relative{
+	position: relative;
+}
+.right{
+	float:right;
+}
+.overflow-hide{
+	overflow:scroll;
+}
 .clearfix:before,
 .clearfix:after{
 	content: " ";
@@ -10,24 +28,22 @@ html, body{
 	clear: both;
 }
 #container{
-	min-height: 80%;
-	width:80%;
-
-	float: right;
-	margin:0px;
-	padding: 20px;
+	height:90%;
 }
 #sidebar{
 
 	height: 90%;
-	min-width:200px;
     width: auto;
-    position: relative;
+    position: absolute;
     float: left;
+    bottom: 0;
 }
 
 .navbar-inverse{
 	margin-bottom: 0px;
+}
+.navbar-header{
+	width:70%;
 }
 
 
@@ -48,3 +64,82 @@ html, body{
     user-select: none;
     cursor: pointer;
 }
+
+@media only screen and (max-width: 992px) {
+.hundred{
+	height: 50%;
+}
+
+
+}
+
+@media only screen and (max-width: 768px) {
+.navbar-header{
+		width:100%;
+}
+#web-player{
+	min-width:50%;
+	max-width:550px;
+}
+#sidebar{
+	max-height: 200px;
+}
+.row-hundred{
+	min-height: 50%;
+}
+.hundred{
+
+padding: 0px
+}
+.relative{
+
+}
+.right{
+float:none;
+}
+.overflow-hide{
+overflow:visible;
+}
+#sidebar{
+	position: relative;
+	height:100%;
+	min-width:200px;
+    width: 100%;
+}
+
+#songdata{
+	height: 100px;
+
+}
+#songinfo{
+	float :right;
+}
+#albumart {
+	min-height: 0px;
+	width:10%;
+	height: 10%;
+	float: left;
+}
+#albumart img{
+	width:100px;
+	height: 100px;
+}
+
+.collapse{
+	display: none;
+}
+
+
+
+}
+
+@media only screen and (min-width: 767px) {
+.navbar-header{
+		width:70%;
+}
+.collapse{
+	display:block;
+}
+
+}
+

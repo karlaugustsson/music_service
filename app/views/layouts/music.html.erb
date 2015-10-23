@@ -13,7 +13,6 @@
 
 </head>
 <body>
-
 		<%= render(:partial => "assets/navigationbar")%>
 				
 				<% if !flash['notice'].blank? %>
@@ -23,19 +22,28 @@
 				</div>
 			
 			<% end %>
-	<%if @onlineUser%>
-	<div id="sidebar">
-		<div id="web-player">
-			<%= render(:partial => "assets/myplayer")%>
-			<%= render(:partial => "assets/myplayer_script")%>
+	<div id="container" class="container-fluid">
+			<div class="row row-hundred">
+				<div class="col-sm-12 col-md-10 right overflow-hide hundred">
+					<div id="main">
+						<%= yield() %>
+					</div>
+					
+		
+				</div>
+				<div class="col-sm-12 col-md-2 hundred relative">
+					<%if @onlineUser%>
+						<div id="sidebar">
+						<div id="web-player">
+						<%= render(:partial => "assets/myplayer")%>
+						<%= render(:partial => "assets/myplayer_script")%>
+						</div>
+						</div>
+					<%end %>
+				</div>
 		</div>
 	</div>
-	<%end %>
-	<div id="container" class="container-fluid">
 
-		<%= yield() %>
-			
-	</div>
 
 </body>
 </html>

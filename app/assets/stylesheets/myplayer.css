@@ -17,8 +17,8 @@
 color:black;
 }
 #album_art_image_tag , #albumart {
-  height:200px;
-  width:200px;
+
+  width:100%;
 }
 #songinfo{
   width: 200px;
@@ -28,7 +28,7 @@ color:black;
 }
 
 #songdata{
-	min-height:200px;
+	min-height:100px;
 	background-color:#2B2929;
 }
 #songinfo{
@@ -165,4 +165,12 @@ input[type=range]::-ms-fill-upper {
 }
 input[type=range]:focus::-ms-fill-upper {
   background: #367ebd;
+}
+
+@media only screen and (max-width: 767px) {
+#web-player{
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
 }
