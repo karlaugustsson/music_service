@@ -97,9 +97,7 @@ padding: 0px
 .right{
 float:none;
 }
-.overflow-hide{
-overflow:visible;
-}
+
 #sidebar{
 	position: relative;
 	height:100%;

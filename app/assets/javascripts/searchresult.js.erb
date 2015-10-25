@@ -241,7 +241,7 @@ function createlink(subject,path){
 }
 function createSongParagraf(id,song){
 	var p = createNewElement("p",song)
-	if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+	if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Silk|Opera Mini/i.test(navigator.userAgent) ) {
  		var eventclick = "onclick"
 	}else{
 		var eventclick = "ondblclick"
