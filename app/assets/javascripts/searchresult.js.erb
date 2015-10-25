@@ -46,7 +46,8 @@ for (var i =0 ; i < artistResult.length; i++) {
 			table = createTableHeaders(table,tableHeaders)
 			table.id = "list"
 			table.className = "table zebra-striped table-condensed table-hover"
-			
+			var tbody = createNewElement("tbody")
+			table.appendChild(tbody)
 		
 				var album  = artistResult.filter(function(obj){
 		
@@ -88,7 +89,7 @@ for (var i =0 ; i < artistResult.length; i++) {
 				tr.appendChild(appendTo("td",trackparagraf))
 				tr.appendChild(appendTo("td",tracklength))
 
-				table.appendChild(tr)
+				tbody.appendChild(tr)
 	
 			}
 
@@ -113,6 +114,8 @@ for (var i =0 ; i < artistResult.length; i++) {
 	
 	var tableHeader = ["Track" ,"length"]
 	var table = createTableHeaders(table,tableHeader)
+	var tbody = createNewElement("tbody")
+	table.appendChild(tbody)
 		
 
 
@@ -151,7 +154,7 @@ for (var i =0 ; i < artistResult.length; i++) {
 
 
 
-		table.appendChild(tr);
+		tbody.appendChild(tr);
 
 	};
 
@@ -188,6 +191,8 @@ function itterateSearchResult(){
 	
 	var table = document.getElementById("searchResult")
 		table = createTableHeaders(table,tableHeader)
+		var tbody = createNewElement("tbody")
+		table.appendChild(tbody)
 	
 
 for (var i = 0 ;  i < searchResult.length; i++) {
@@ -219,7 +224,7 @@ for (var i = 0 ;  i < searchResult.length; i++) {
 		tr.appendChild(appendTo("td",albumlink))
 
 
-		table.appendChild(tr);
+		tbody.appendChild(tr);
 	
 }
 
@@ -236,8 +241,12 @@ function createlink(subject,path){
 }
 function createSongParagraf(id,song){
 	var p = createNewElement("p",song)
-
-	var attribute = appendAttribute(p,"ondblclick","updatePlayListAndPlay(" + id + ")")
+	if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+ 		var eventclick = "onclick"
+	}else{
+		var eventclick = "ondblclick"
+	}
+	var attribute = appendAttribute(p,eventclick,"updatePlayListAndPlay(" + id + ")")
 	return p
 }
 function appendAlbumInfo(artist,album,albumart){

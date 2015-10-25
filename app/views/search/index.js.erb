@@ -2,6 +2,11 @@
 	var main = document.getElementById("main")
 	var searchField = document.getElementById("searchField")
 	searchField.value = ""
+		if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) && screen.width < 600) {
+ 			var menu = document.getElementById("toggleMenu")
+		menu.className = "navbar-toggle collapsed collapse"
+		}
+
 	main.innerHTML = ""
 	main.innerHTML = "<%= j render 'index' %>"
 	printsearch = document.getElementById("search-result")
