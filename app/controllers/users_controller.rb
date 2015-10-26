@@ -21,7 +21,12 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(users_params)
+    @user_activation_code = UserActivationCode.new
+    @user_activation_code.code = new_user_activation_code
+    @user_activation_code.user_id = @user.id
     if @user.save
+
+      UserRegristrationMailer.register_email(@user,@user_activation_code.code , request.host_with_port).deliver_later
       message("SuccesFully created a account check email for activation","success")
       redirect_to("/", :controller => "public")
 
@@ -46,4 +51,16 @@ class UsersController < ApplicationController
   def users_params
     params.require(:user).permit(:email,:password)
 end
+def new_user_activation_code
+      
+    while true
+        uniquestring = generate_random_string
+        if UserActivationCode.where(:code => uniquestring).first == nil
+          return uniquestring
+        end
+      
+
+    end
+end
+
 end

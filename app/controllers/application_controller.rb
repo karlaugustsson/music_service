@@ -3,11 +3,11 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-
+private
       def message message  , type
       flash['notice'] = message
       flash['type'] = type
-    end 
+    end
 
 
 def redirect_if_not_logged_in
@@ -28,4 +28,11 @@ end
 def set_logged_in_user
 @onlineUser = User.find(session[:user])
 end
+  def generate_random_string
+
+    o = [('a'..'z'), ('A'..'Z'), (1 .. 9)].map { |i| i.to_a }.flatten
+    
+    return (0...50).map { o[rand(o.length)] }.join 
+  
+  end 
 
