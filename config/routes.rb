@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+   get 'auth_user' => "register_user#register_user"
+   get 'delete_account' => 'register_user#delete_account'
   get 'login/' => "login#index"
    get 'main/' => "public#main"
   post 'login/attempt_login' => "login#attempt_login"

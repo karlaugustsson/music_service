@@ -55,9 +55,7 @@ end
 def users_params
     params.require(:user).permit(:email,:password)
 end
-def create_user_session(id)
-	session[:user] = id
-end
+
 
 
 end

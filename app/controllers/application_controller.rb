@@ -33,6 +33,9 @@ end
     o = [('a'..'z'), ('A'..'Z'), (1 .. 9)].map { |i| i.to_a }.flatten
     
     return (0...50).map { o[rand(o.length)] }.join 
-  
+
   end 
+  def create_user_session(id)
+  session[:user] = id
+end
 
