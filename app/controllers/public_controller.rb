@@ -5,6 +5,7 @@ class PublicController < ApplicationController
 	before_action :set_logged_in_user , :only => :main
 
 	def index
+		@index = "fox"
 	end
 	def main
 end

@@ -173,6 +173,7 @@ function insertMeta(audio,id){
 	var albumId = queuesonglist[id]["album"]["id"]
 	var songTitle = queuesonglist[id]["name"]
 	var artist = queuesonglist[id]["album"]["music_groups"][0]["name"]
+	var artistId = queuesonglist[id]["id"]
 	var songinfo = document.getElementById("songinfo")
 	var track = queuesonglist[id]["music_file_file_name"] + new Date().getTime()
 	
@@ -182,7 +183,8 @@ function insertMeta(audio,id){
 	var source = document.getElementById("source");
 
 	source.setAttribute("src",track);
-	source.type = type 
+	updateResultWithColor(artistId)
+	source.type = type
 	if(!document.getElementById("album_art_image_tag")){
 		var imagetag = document.createElement("img");
 		imagetag.id = "album_art_image_tag"
@@ -374,6 +376,20 @@ function convertToMinutesSeconds(time){
 		seconds = "0" + seconds
 	}
 	return minutes + ":" + seconds
+}
+
+function updateResultWithColor(id){
+	var prev = document.getElementsByClassName("song-active")[0]
+
+	if(prev != undefined){
+		prev.className = ""
+
+	}
+	var newActiveSong = document.getElementById("song_id_" + id)
+	if(newActiveSong != undefined){
+		newActiveSong.className = "song-active"
+	}
+	
 }
 
 

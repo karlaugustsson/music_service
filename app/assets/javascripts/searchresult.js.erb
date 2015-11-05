@@ -23,7 +23,10 @@ function printAlbumResult(){
 }
 function printArtistResult(){
 	var albums = []
-
+	var artisth2 = document.getElementById("artist-info").firstChild.nextSibling
+	var playingNow = findSongPlaying()
+	artisth2.innerHTML = artistResult[0]["album"]['music_groups'][0]["name"]
+	console.log(artisth2)
 for (var i =0 ; i < artistResult.length; i++) {
 	
 		
@@ -81,14 +84,23 @@ for (var i =0 ; i < artistResult.length; i++) {
 
 			if(albums[i] == artistResult[y]["album"]["id"]){
 				var tr = createNewElement("tr")
+				tr = appendAttribute(tr,"tabindex", "1")
+				tr = generatePlaylistClickEvent(tr,y)
+				tr.id = "song_id_" + artistResult[y]["id"]
+				if(playingNow != undefined && artistResult[y]["id"] == playingNow ){
+					tr.className = "song-active"
+				}
+
 				var trackparagraf = createSongParagraf(y,artistResult[y]["name"])
 				
 				var tracklength = createNewElement("p",artistResult[y]["track_length"])
 				var position = createNewElement("p",artistResult[y]["position"])
 				tr.appendChild(appendTo("td",position))
+				tr.firstChild.className = "col-md-4"
 				tr.appendChild(appendTo("td",trackparagraf))
+				tr.firstChild.nextSibling.className = "col-md-4"
 				tr.appendChild(appendTo("td",tracklength))
-
+				tr.firstChild.nextSibling.nextSibling.className = "col-md-4"
 				tbody.appendChild(tr)
 	
 			}
@@ -102,17 +114,20 @@ for (var i =0 ; i < artistResult.length; i++) {
 	};
 }
 	function itterateAlbumResult(){
+	var playingNow = findSongPlaying()
+
 	var artist = albumResult[0]["album"]["music_groups"][0]
-	var album = albumResult[0]["album"]["name"]
+	var album = albumResult[0]["album"]
 	var albumart = albumResult[0]["album"]["full_path_album_art"]
 	var albumDiv = appendAlbumInfo(artist,album,albumart)
-	var resultdiv = document.getElementById("result")
+	var resultdiv = document.getElementById("album-info")
 
 
 	
-	var table = document.getElementById("list")
+	var table = createNewElement("table")
+	table.className = "table zebra-striped table-hover"
 	
-	var tableHeader = ["Track" ,"length"]
+	var tableHeader = ["#" , "Track" ,"length"]
 	var table = createTableHeaders(table,tableHeader)
 	var tbody = createNewElement("tbody")
 	table.appendChild(tbody)
@@ -138,15 +153,25 @@ for (var i =0 ; i < artistResult.length; i++) {
 		
 		var trackparagraf = createSongParagraf(i,track)
 
+		var trackpos = createNewElement("p" ,albumResult[i]["position"] )
 
 		var artistlink = createlink(artist,"artists/"+ artistId +"/")
 	
 		
 
 		var tr = createNewElement("tr")
+		tr = appendAttribute(tr,"tabindex", "1")
+		tr = generatePlaylistClickEvent(tr,i)
+		tr.id = "song_id_" + albumResult[i]["id"]
+
+		if(playingNow != undefined && albumResult[i]["id"] == playingNow ){
+			tr.className = "song-active"
+		}
 
 
 
+
+		tr.appendChild(appendTo("td",trackpos))
 		tr.appendChild(appendTo("td",trackparagraf))
 		
 		tr.appendChild(appendTo("td",trackLengthParagraf))
@@ -161,32 +186,39 @@ for (var i =0 ; i < artistResult.length; i++) {
 	
 
 	var tr = createNewElement("tr")
-	var albumInfoString = ""
-	var albumReleaseDate = new Date(albumResult[0]["album"]["release_date"]).getFullYear()
+	
+	var albumInfoString = createNewElement("td")
+	
+	albumInfoString.appendChild(createlink("Artist: " + artist["name"],"artists/"+ artist["id"] +"/"))
+
+
+	var releaseDate = createNewElement("span"," " +  new Date(albumResult[0]["album"]["release_date"]).getFullYear())
+
+
 	for (var i = 0;  i < albumResult[0]["album"]["labels"].length ; i++) {
 		var label = albumResult[0]["album"]["labels"][i]["label_name"]
 		
-		albumInfoString += label + " " 
+		albumInfoString.appendChild(createNewElement("span" , " " + label))
+
 		if(i == albumResult[0]["album"]["labels"].length - 1){
-			albumInfoString += " " + albumReleaseDate
+			albumInfoString.appendChild(releaseDate)
 			
 		}
 	
 	};
 
-	var labelsparagraf = createNewElement("p")
-	labelsparagraf.innerHTML = albumInfoString
 
-	tr.appendChild(appendTo("td",labelsparagraf))
+	tr.appendChild(albumInfoString)
 
 	table.appendChild(tr)
-	
-	searchdiv.innerHTML = table
+
+	resultdiv.appendChild(table)
 
 }
 function itterateSearchResult(){
 
-	
+	var playingNow = findSongPlaying()
+
 	var tableHeader = ["Track" , "Artist" , "Album"]
 	
 	var table = document.getElementById("searchResult")
@@ -207,6 +239,16 @@ for (var i = 0 ;  i < searchResult.length; i++) {
 		var albumId = searchResult[i]["album"]["id"]
 
 		var tr = createNewElement("tr")
+
+		tr = appendAttribute(tr,"tabindex", "1")
+
+		tr = generatePlaylistClickEvent(tr,i)
+
+		tr.id = "song_id_" + searchResult[i]["id"]
+
+		if(playingNow != undefined && searchResult[i]["id"] == playingNow ){
+			tr.className = "song-active"
+		}
 
 		var trackparagraf = createSongParagraf(i,track)
 	
@@ -241,25 +283,41 @@ function createlink(subject,path){
 }
 function createSongParagraf(id,song){
 	var p = createNewElement("p",song)
+	 p = generatePlaylistClickEvent(p,id)
+
+	return p
+}
+
+function generatePlaylistClickEvent(node, id){
+
 	if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Silk|Opera Mini/i.test(navigator.userAgent) ) {
  		var eventclick = "onclick"
 	}else{
 		var eventclick = "ondblclick"
 	}
-	var attribute = appendAttribute(p,eventclick,"updatePlayListAndPlay(" + id + ")")
-	return p
+
+	return appendAttribute(node,eventclick,"updatePlayListAndPlay(" + id + ")")
 }
 function appendAlbumInfo(artist,album,albumart){
 	var albumInfoDiv = document.getElementById("album-info")
+	
 	var albumart = createImageTag(albumart,album)
 		albumart.height = 200
-		var artistparagraf = createNewElement("p","Artist:")
-		artistparagraf.appendChild(createlink(artist["name"],"artists/"+artist["id"]+"/"))
+	
+	// var artistparagraf = createNewElement("h2",artist["name"] )
+
 	 
-		var albumparagraf = createNewElement("p","Album:" + album)
-		albumInfoDiv.appendChild(albumart)
-		albumInfoDiv.appendChild(artistparagraf)
-		albumInfoDiv.appendChild(albumparagraf)
+	var albumparagraf = createNewElement("h2", album["name"])
+
+	var yearparagraf = createNewElement("h2",new Date(album["release_date"]).getFullYear())
+	var table = createNewElement("table")
+		table.className = "table"
+
+		table.appendChild(appendTo("th",albumart))
+
+		table.appendChild(appendTo("th",albumparagraf))
+		albumInfoDiv.appendChild(table)
+
 	return albumInfoDiv
 }
 function appendTo(type,data){
@@ -295,9 +353,11 @@ function createTableHeaders(table,header){
 
 function appendAttribute(subject,attribute,value){
 	var newAttribute = document.createAttribute(attribute)
-	newAttribute.value = value
 
-	return subject.setAttributeNode(newAttribute)
+	newAttribute.value = value
+	
+	subject.setAttributeNode(newAttribute)
+	return subject
 
 }
 function createImageTag(source,text,a){
@@ -312,4 +372,19 @@ function createImageTag(source,text,a){
 	a.appendChild(img)
 	
 	return a
+}
+
+function findSongPlaying(){
+	if(songPlaying == undefined){
+		return undefined
+	}else if(queuesonglist == undefined){
+		return undefined
+		
+	}else{
+		return queuesonglist[songPlaying]["id"]
+	}
+	
+
+
+
 }

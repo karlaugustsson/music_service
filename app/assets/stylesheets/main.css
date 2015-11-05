@@ -1,6 +1,86 @@
 html, body{
   height:100%;
+  
 }
+#main{
+	margin:5%;
+}
+
+
+.fox{
+	background-image: url('nyc.jpg');
+	background-size: cover;
+	background-repeat: none;
+}
+#albumart img{
+ width:200px;
+}
+#album-info{
+	width: 70%;
+}
+#album-info th h2{
+	margin-left :10%;
+}
+.table {
+	margin-bottom :50px;
+	   -moz-user-select: none;
+   -khtml-user-select: none;
+   -webkit-user-select: none;
+
+   /*
+     Introduced in IE 10.
+     See http://ie.microsoft.com/testdrive/HTML5/msUserSelect/
+   */
+   -ms-user-select: none;
+   user-select: none;
+
+}
+.table td{
+	font-weight: bold;
+	font-size: 11px;
+}
+.table a {
+	color:black;
+}
+.jumbotron{
+	margin:30px;
+}
+#result{
+	width: 100%;
+}
+.table-hover tbody tr:hover td ,  .table-hover tbody tr:hover th{
+  background-color: #FF751A;
+  color: red;
+  cursor: pointer;
+
+  
+}
+.table-hover tbody tr:hover td a, .table-hover tbody tr:hover td p ,.table-hover tbody tr:hover th{
+  color: white;
+}
+
+.table-hover :focus {
+  background-color: #FF6600;
+  color: white;
+  cursor: pointer;
+
+  
+}
+.table-hover :focus a{
+  background-color: #FF6600;
+  color: white;
+  cursor: pointer;
+
+  
+}
+.table-hover :focus p{
+  color: white;
+}
+
+.song-active  a , .song-active p {
+	color: #FF6600;
+}
+
 .collapse{
 	display: block;
 }
@@ -29,6 +109,10 @@ html, body{
 }
 #container{
 	height:90%;
+
+}
+#artist-info{
+	margin-bottom: 20px;
 }
 #sidebar{
 
@@ -50,9 +134,25 @@ html, body{
 
 
 /*albumview img*/
+.albuminfo{
+	margin-bottom: 20px;
+
+}
 .albuminfo img {
 	 	height:100px;
+	
 	 	width:100px;
+}
+.albuminfo a {
+	margin-left: 10px;
+	color: black;
+}
+#album-info a , #album-info p{
+  margin-top: 10px;
+
+  font-weight: bold;
+  font-size: 11px;
+  
 }
 
 .searchResult{
@@ -74,6 +174,13 @@ html, body{
 }
 
 @media only screen and (max-width: 768px) {
+#album-info img{
+	width:100px;
+	height: 100px;
+}
+.overflow-hide{
+	overflow:scroll;
+}
 .navbar-header{
 		width:100%;
 }
@@ -114,8 +221,8 @@ float:none;
 }
 #albumart {
 	min-height: 0px;
-	width:10%;
-	height: 10%;
+	width:100px;
+	height: 100px;
 	float: left;
 }
 #albumart img{
