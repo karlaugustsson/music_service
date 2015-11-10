@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
+
 private
       def message message  , type
       flash['notice'] = message
@@ -37,5 +38,12 @@ end
   end 
   def create_user_session(id)
   session[:user] = id
+end
+def set_environment_url
+  if Rails.env == "development"
+    @url = "http://localhost:3000"
+  else
+    @url = "http://api.artistservice.xyz"
+  end
 end
 

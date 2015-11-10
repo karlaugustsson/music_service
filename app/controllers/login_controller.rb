@@ -1,5 +1,6 @@
 class LoginController < ApplicationController
-	layout "music"
+	before_action :set_environment_url
+  layout "music"
   def index
 
   end

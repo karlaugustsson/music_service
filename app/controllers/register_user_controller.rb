@@ -1,5 +1,6 @@
 class RegisterUserController < ApplicationController
 	before_action :have_code
+  before_action :set_environment_url
   def register_user
   	@user = @code.user
 

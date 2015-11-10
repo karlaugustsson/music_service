@@ -4,13 +4,17 @@ class SearchController < ApplicationController
 	layout "music"
 	skip_before_filter :verify_authenticity_token
   before_action :redirect_if_not_logged_in
+  before_action :set_environment_url
 
   def index
   	if params[:search] && params[:search].blank? == false
-          @searchTrack = open("http://localhost:3000/v1/search_album_tracks?search=#{params[:search]}").read
-  		  	@searchGroup = open("http://localhost:3000/v1/search_music_groups?search=#{params[:search]}").read
-          @searchAlbum = open("http://localhost:3000/v1/search_albums?search=#{params[:search]}").read
-          
+        if 
+          @searchTrack = open("#{@url}/v1/search_album_tracks?search=#{params[:search]}").read
+  		  	@searchGroup = open("#{@url}/v1/search_music_groups?search=#{params[:search]}").read
+          @searchAlbum = open("#{@url}/v1/search_albums?search=#{params[:search]}").read
+          else
+
+          end
           @search = []
           @searchTrack = JSON.parse(@searchTrack)
           @searchGroup = JSON.parse(@searchGroup)

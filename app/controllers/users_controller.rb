@@ -3,6 +3,7 @@ class UsersController < ApplicationController
 
   before_action :redirect_if_logged_in , :only => :new
   before_action :set_logged_in_user , :except => [:new , :create]
+  before_action :set_environment_url
   def index
   end
 

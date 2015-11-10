@@ -36,7 +36,7 @@
 					<%if @onlineUser%>
 						<div id="sidebar">
 						<div id="web-player">
-						<%= render(:partial => "assets/myplayer")%>
+						<%= render(:partial => "assets/myplayer" , :locals => {:url => @url})%>
 						<%= render(:partial => "assets/myplayer_script")%>
 						</div>
 						</div>
