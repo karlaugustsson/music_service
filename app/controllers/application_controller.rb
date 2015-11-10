@@ -43,7 +43,7 @@ def set_environment_url
   if Rails.env == "development"
     @url = "http://localhost:3000"
   else
-    @url = "http://api.artistservice.xyz"
+    @url = "http://artistservice.xyz"
   end
 end
 
