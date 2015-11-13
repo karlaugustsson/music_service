@@ -28,10 +28,9 @@ color:black;
 }
 
 #songinfo{
-  width: 90%;
-  padding-top: 2%;
-  padding-bottom: 2%;
+  width: auto;
   padding-left:5%;
+  float:left;
 
   font-family: 'PT Sans Narrow', sans-serif;
 }
@@ -49,6 +48,9 @@ color:black;
 #songinfo{
 	background-color: #2B2929;
 	color:white;
+}
+#songinfo p {
+  margin:0;
 }
 
 #web-player input[type="button"]{

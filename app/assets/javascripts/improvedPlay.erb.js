@@ -395,8 +395,10 @@ function expandPlayer(){
 	var mainContent = document.getElementById("mainContent")
 	var playerDiv = document.getElementById("playerDiv")
 	var songdata = document.getElementById("songdata")
+	var hideshowButtonSpan = document.getElementById("hideShowPlayer")
 	playerArt = document.getElementById("albumart")
 	if (this.getAttribute("data-hide") == "hidden"){
+		hideshowButtonSpan.className="glyphicon glyphicon-chevron-down"
 		mainContent.className = "col-sm-12 col-md-9 right  eighty none"
 		playerDiv.className = "col-sm-12 col-md-3 hundred relative"
 		playerArt.style.height = "75%"
@@ -404,6 +406,7 @@ function expandPlayer(){
 		songdata.style.height = "75%"
 		this.setAttribute("data-hide", "show")
 	}else{
+		hideshowButtonSpan.className="glyphicon glyphicon-chevron-up"
 		playerDiv.className = "col-sm-12 col-md-3 hundred twenty relative"
 		mainContent.className = "col-sm-12 col-md-9 right  eighty overflow-hide"
 				playerArt.style.height = ""
