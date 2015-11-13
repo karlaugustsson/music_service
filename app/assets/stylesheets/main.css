@@ -5,7 +5,9 @@ html, body{
 #main{
 	margin:5%;
 }
-
+.none{
+	display: none;
+}
 
 .fox{
 	background-image: url('nyc.jpg');
@@ -46,7 +48,7 @@ html, body{
 	margin:30px;
 }
 #result{
-	width: 100%;
+	width: 100%;sudo a
 }
 .table-hover tbody tr:hover td ,  .table-hover tbody tr:hover th{
   background-color: #FF751A;
@@ -166,9 +168,7 @@ html, body{
 }
 
 @media only screen and (max-width: 992px) {
-.hundred{
-	height: 50%;
-}
+
 
 
 }
@@ -187,9 +187,6 @@ html, body{
 #web-player{
 	min-width:50%;
 	max-width:550px;
-}
-#sidebar{
-	max-height: 200px;
 }
 .row-hundred{
 	min-height: 50%;
@@ -217,7 +214,6 @@ float:none;
 
 }
 #songinfo{
-	float :right;
 }
 #albumart {
 	min-height: 0px;
@@ -226,8 +222,8 @@ float:none;
 	float: left;
 }
 #albumart img{
-	width:100px;
-	height: 100px;
+height: 100%;
+width:100%;
 }
 
 .collapse{

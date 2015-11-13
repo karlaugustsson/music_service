@@ -4,42 +4,72 @@
 	</audio>	
 </div>
 <div id="player">
+				<button id="hideshowplayer" data-hide="hidden" data-toggle="collapse" title="hideshowplayer" data-target="#controller">
+				<span class="glyphicon glyphicon-chevron-up" id="playIcon" aria-hidden="true"></span>
+			</button>
 	<div id="songdata">
 		<div id="albumart">
-			<img src="<%= @url %>/images/fallback/default.png" alt="placeholderimage" width="200">
+			<img id="playerArt" src="<%= @url %>/images/fallback/default.png" alt="placeholderimage" >
 		</div>
 		<div id="songinfo">
-			
+
 		</div>
 	</div>
-	<div id="controller">
+	<div id="controller" class="collapse">
 		
-		<button id="previoustrack" title="previoustrack" aria-label="Previous track">
-		<span class="glyphicon glyphicon-backward" aria-hidden="true"></span>
-		</button>
-			
-		<button  name="playbutton" id="notplaying"  title="Play" aria-label="Play Music">
-		<span class="glyphicon glyphicon-play" id="playIcon" aria-hidden="true"></span>
+		<div class="row">
+			<div class="col-xs-2">
+				
+			</div>
+			<div class="col-xs-2">
+				<button id="previoustrack" title="previoustrack" aria-label="Previous track">
+					<span class="glyphicon glyphicon-backward" aria-hidden="true"></span>
+				</button>
+			</div>
 
-		</button>
-		
-		<button id="nexttrack" title="previoustrack" aria-label="Next track">
-		<span class="glyphicon glyphicon-forward" aria-hidden="true"></span>
-		</button>
-		
-		<button class="shuffle off" id="shuffle" title="shuffle media">
-		<span class="glyphicon glyphicon-random" aria-hidden="true"></span>
+			<div class="col-xs-2">
+				<button  name="playbutton" id="notplaying"  title="Play" aria-label="Play Music">
+					<span class="glyphicon glyphicon-play" id="playIcon" aria-hidden="true"></span>
+				</button>
+			</div>
 
-		</button>
-		<input type="range"   min="0" max="500"  value="0" step="any" id="seekBar"/>
-		<div id="timer">
-		 <p id="currentTime">0:00</p>
-		
+			<div class="col-xs-2">
+				<button id="nexttrack" title="previoustrack" aria-label="Next track">
+					<span class="glyphicon glyphicon-forward" aria-hidden="true"></span>
+				</button>
+			</div>
+			<div class="col-xs-2">
+				<button class="shuffle off" id="shuffle" title="shuffle media">
+					<span class="glyphicon glyphicon-random" aria-hidden="true"></span>
+				</button>
+			</div>
+			<div class="col-xs-2">
+				
+			</div>
 		</div>
-		<button class ="mute false" id="muteButton" title="Mute">
-		<span class="glyphicon glyphicon-volume-up" id="muteIcon" aria-hidden="true"></span>
-		</button>
-		<input type="range" id="volumeControl" min="0" max="1" value="1" width="20%" height="100" step="any" />
+		<div class="row">
+			
+			<div class="col-xs-10">
+				<input type="range"   min="0" max="500"  value="0" step="any" id="seekBar"/>
+			</div>
+			<div class="col-xs-1">
+				<div id="timer">
+			 		<p id="currentTime">0:00</p>
+			 	</div>
+		</div>
+
+		</div>
+
+		<div class="row">
+			<div class="col-xs-2">
+				<button class ="mute false" id="muteButton" title="Mute">
+				<span class="glyphicon glyphicon-volume-up" id="muteIcon" aria-hidden="true"></span>
+				</button>
+			</div>
+				<div class="col-xs-10">
+				<input type="range" id="volumeControl" min="0" max="1" value="1" width="20%" height="100" step="any" />
+				</div>
+		</div>	
 
 	</div>
 </div>

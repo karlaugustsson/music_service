@@ -391,6 +391,28 @@ function updateResultWithColor(id){
 	}
 	
 }
+function expandPlayer(){
+	var mainContent = document.getElementById("mainContent")
+	var playerDiv = document.getElementById("playerDiv")
+	var songdata = document.getElementById("songdata")
+	playerArt = document.getElementById("albumart")
+	if (this.getAttribute("data-hide") == "hidden"){
+		mainContent.className = "col-sm-12 col-md-9 right  eighty none"
+		playerDiv.className = "col-sm-12 col-md-3 hundred relative"
+		playerArt.style.height = "75%"
+		playerArt.style.width = "100%"
+		songdata.style.height = "75%"
+		this.setAttribute("data-hide", "show")
+	}else{
+		playerDiv.className = "col-sm-12 col-md-3 hundred twenty relative"
+		mainContent.className = "col-sm-12 col-md-9 right  eighty overflow-hide"
+				playerArt.style.height = ""
+		playerArt.style.width = ""
+		songdata.style.height = ""
+		this.setAttribute("data-hide", "hidden")
+	}
+	
+}
 
 
 

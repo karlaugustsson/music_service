@@ -14,6 +14,7 @@ var nextTrackButton = document.getElementById('nexttrack');
 var prevTrackButton = document.getElementById('previoustrack');
 var shuffleButton = document.getElementById('shuffle');
 var shuffleSet = false
+var togglemobileplayersize = document.getElementById("hideshowplayer")
 
 
 // player.addEventListener("canplaythrough",function(){
@@ -29,4 +30,6 @@ shuffleButton.addEventListener("click",toggleShuffle);
 muted.addEventListener("click" , toggleMute)
 volumeControl.addEventListener("change" , setVolume);
 seekBar.addEventListener("mouseup",changeSongTimePosition);
+togglemobileplayersize.addEventListener("click" , expandPlayer)
+
 </script>

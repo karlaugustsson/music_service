@@ -6,7 +6,9 @@
 
 
 }
-
+#player{
+  height: 100%;
+}
 #web-player{
   position:absolute;
   bottom :0px;
@@ -26,7 +28,7 @@ color:black;
 }
 
 #songinfo{
-  width: 200px;
+  width: 90%;
   padding-top: 2%;
   padding-bottom: 2%;
   padding-left:5%;
@@ -76,6 +78,25 @@ input[type=range] {
 #timer {
 	
 	display:inline-block;
+}
+
+@media only screen and (max-width: 768px) {
+  #controller{
+
+  }
+  .eighty{
+  height: 80%;
+}
+.twenty{
+  height: 20%;
+}
+  #hideshowplayer{
+    color:white;
+    background-color: transparent;
+    border: none;
+    float: right;
+
+  }
 }
 
 input[type=range]::-webkit-slider-thumb {
