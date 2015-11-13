@@ -37,6 +37,7 @@ color:black;
 }
 #songinfo p {
   width:80%;
+  background-color: transparent;
 }
 #controller{
 
