@@ -28,6 +28,7 @@ color:black;
 }
 
 #songinfo{
+  min-width: 200px;
   width: auto;
   padding-left:5%;
   float:left;
@@ -73,7 +74,6 @@ input[type=range] {
 	display:inline;
 }
 #seekBar {
-	width:75%;
 	display: inline-block;
 
 }
