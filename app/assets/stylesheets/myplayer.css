@@ -54,8 +54,8 @@ color:black;
 #web-player input[type="button"]{
 	border:none;
 	background-color: transparent;
-	margin :none;
-	padding: none;
+	margin :0;
+	padding: 0;
 }
 
 

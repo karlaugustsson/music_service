@@ -12,7 +12,7 @@ html, body{
 .fox{
 	background-image: url('nyc.jpg');
 	background-size: cover;
-	background-repeat: none;
+	background-repeat: no-repeat;
 }
 #albumart img{
  width:200px;
@@ -48,7 +48,7 @@ html, body{
 	margin:30px;
 }
 #result{
-	width: 100%;sudo a
+	width: 100%;
 }
 .table-hover tbody tr:hover td ,  .table-hover tbody tr:hover th{
   background-color: #FF751A;
