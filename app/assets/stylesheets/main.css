@@ -14,6 +14,9 @@ html, body{
 	background-size: cover;
 	background-repeat: no-repeat;
 }
+#maincontent{
+	height:100%;
+}
 #albumart img{
  width:200px;
 }
