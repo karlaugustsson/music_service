@@ -222,7 +222,6 @@ input[type=range]:focus::-ms-fill-upper {
   width: auto;
   height:auto;
   max-width: 100%;
-
 }
 #albumart{
   display: inline-block;
