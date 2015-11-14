@@ -6,10 +6,7 @@
 
 
 }
-#songinfo{
-  height:50px;
-  width:100%;
-}
+
 #player{
   height: 100%;
 }
@@ -34,16 +31,20 @@ color:black;
 
 
 #songinfo{
+  background-color: #2B2929;
+  color:white;
+  min-height:50px;
+  width:auto;
   min-width: 1px;
-  width: 100%;
   padding-left:5%;
-  float:left;
+
 
   font-family: 'PT Sans Narrow', sans-serif;
 }
 #songinfo p {
-
+margin:0;
   height: auto;
+  width: 100%;
   background-color: transparent;
 }
 #controller{
@@ -51,16 +52,11 @@ color:black;
 }
 
 #songdata{
-	min-height:100px;
+	height:auto;
+
 	background-color:#2B2929;
 }
-#songinfo{
-	background-color: #2B2929;
-	color:white;
-}
-#songinfo p {
-  margin:0;
-}
+
 
 #web-player input[type="button"]{
 	border:none;
