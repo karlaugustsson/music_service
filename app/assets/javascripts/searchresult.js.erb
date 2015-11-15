@@ -319,7 +319,7 @@ function appendAlbumInfo(artist,album,albumart){
 		var tr = createNewElement("tr")
 		tbody.appendChild(tr) 
 		
-		tr.appendChild(appendTo("tr",albumart , 12 ,6))
+		tr.appendChild(appendTo("tr",albumart , 12 , 6))
 
 		tr.appendChild(appendTo("tr",albumparagraf , 12 , 6))
 		albumInfoDiv.appendChild(table)
@@ -336,7 +336,7 @@ function appendTo(type,data , bootstrapNum ,secondaryBootstrapnum){
 		
 		element.className = "col-xs-" + bootstrapNum
 
-		if( secondaryBootstrapnum != undefined){
+		if(secondaryBootstrapnum != undefined){
 
 			element.className += " col-md-" + secondaryBootstrapnum
 
@@ -407,7 +407,7 @@ function findSongPlaying(){
 		return queuesonglist[songPlaying]["id"]
 	}
 	
-
-
-
+}
+function fake(){
+	
 }
