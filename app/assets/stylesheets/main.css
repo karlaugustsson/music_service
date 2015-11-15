@@ -167,12 +167,6 @@ html, body{
     cursor: pointer;
 }
 
-@media only screen and (max-width: 992px) {
-
-
-
-}
-
 @media only screen and (max-width: 768px) {
 #mainContent{
 	height:80%;
@@ -216,9 +210,6 @@ float:none;
 	height: 100px;
 
 }
-
-
-
 #albumart {
 	min-height: 0px;
 	width:100px;
