@@ -90,40 +90,7 @@ input[type=range] {
 	display:inline-block;
 }
 
-@media only screen and (max-width: 768px) {
 
-#web-player{
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
-
-#songinfo{
-  display: inline-block;
-  min-width: 1px;
-  width: auto;
-  height:auto;
-  max-width: 100%;
-}
-#albumart{
-  display: inline-block;
-}
-#controller{
-  position: absolute;
-  bottom: 0 ;
-}
-
-.twenty{
-  height: 20%;
-}
-#hideshowplayer{
-    color:white;
-    background-color: transparent;
-    border: none;
-    float: right;
-    display: block;
-}
-}
 
 input[type=range]::-webkit-slider-thumb {
   -webkit-appearance: none;
