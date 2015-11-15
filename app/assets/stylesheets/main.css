@@ -139,6 +139,10 @@ html, body{
 .albuminfo{
 	margin-bottom: 20px;
 
+
+}
+#album-info{
+	width: 100%;
 }
 .albuminfo img {
 	 	height:100px;

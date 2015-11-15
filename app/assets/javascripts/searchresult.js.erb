@@ -128,7 +128,7 @@ for (var i =0 ; i < artistResult.length; i++) {
 	table.className = "table zebra-striped table-hover"
 	
 	var tableHeader = ["#" , "Track" ,"length"]
-	var table = createTableHeaders(table,tableHeader)
+	var table = createTableHeaders(table,tableHeader , 4)
 	var tbody = createNewElement("tbody")
 	table.appendChild(tbody)
 		
@@ -171,26 +171,26 @@ for (var i =0 ; i < artistResult.length; i++) {
 
 
 
-		tr.appendChild(appendTo("td",trackpos))
-		tr.appendChild(appendTo("td",trackparagraf))
+		tr.appendChild(appendTo("td",trackpos , 4))
+		tr.appendChild(appendTo("td",trackparagraf , 4))
 		
-		tr.appendChild(appendTo("td",trackLengthParagraf))
+		tr.appendChild(appendTo("td",trackLengthParagraf , 4))
 		
 
 
 
 		tbody.appendChild(tr);
+		resultdiv.appendChild(table)
 
 	};
+	var table = createNewElement("table")
+	table.className = "table"
+	var tbody = createNewElement("tbody")
+	table.appendChild(tbody)
+	var albumInfoString = createNewElement("tr")
 
-	
 
-	var tr = createNewElement("tr")
-	
-	var albumInfoString = createNewElement("td")
-	
-	albumInfoString.appendChild(createlink("Artist: " + artist["name"],"artists/"+ artist["id"] +"/"))
-
+	albumInfoString.appendChild(appendTo("td",createlink("Artist: " + artist["name"],"artists/"+ artist["id"] +"/"), 4))
 
 	var releaseDate = createNewElement("span"," " +  new Date(albumResult[0]["album"]["release_date"]).getFullYear())
 
@@ -198,19 +198,21 @@ for (var i =0 ; i < artistResult.length; i++) {
 	for (var i = 0;  i < albumResult[0]["album"]["labels"].length ; i++) {
 		var label = albumResult[0]["album"]["labels"][i]["label_name"]
 		
-		albumInfoString.appendChild(createNewElement("span" , " " + label))
+		albumInfoString.appendChild(appendTo("td",createNewElement("span" , " " + label), 4))
+		
 
 		if(i == albumResult[0]["album"]["labels"].length - 1){
-			albumInfoString.appendChild(releaseDate)
 			
+			albumInfoString.appendChild(appendTo("td",releaseDate, 4))
+			
+		
 		}
 	
 	};
 
 
-	tr.appendChild(albumInfoString)
 
-	table.appendChild(tr)
+	tbody.appendChild(albumInfoString)
 
 	resultdiv.appendChild(table)
 
@@ -313,16 +315,23 @@ function appendAlbumInfo(artist,album,albumart){
 	var table = createNewElement("table")
 		table.className = "table"
 
-		table.appendChild(appendTo("th",albumart))
+		table.appendChild(appendTo("th",albumart , 6))
 
-		table.appendChild(appendTo("th",albumparagraf))
+		table.appendChild(appendTo("th",albumparagraf , 6))
 		albumInfoDiv.appendChild(table)
 
 	return albumInfoDiv
 }
-function appendTo(type,data){
+function appendTo(type,data , bootstrapNum ){
+
+
 	var element  = createNewElement(type)
 		element.appendChild(data)
+	if (bootstrapNum != null){
+		
+		element.className = "col-xs-" + bootstrapNum
+
+	}	
 	return element
 }
 function createNewElement(element,value){
@@ -336,14 +345,17 @@ function createNewElement(element,value){
 	return newElement
 	
 }
-function createTableHeaders(table,header){
+function createTableHeaders(table,header  , bootstrapNum){
 	
 		
 	
 	for (var i = 0; i < header.length;i++) {
 		var h = createNewElement("th")
+		if(bootstrapNum != undefined){
+			h.className = "col-xs-" + bootstrapNum
+		}
 		h.innerHTML += header[i];
-	
+		
 		table.appendChild(h)
 	}
 
