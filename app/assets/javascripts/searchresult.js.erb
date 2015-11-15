@@ -314,15 +314,19 @@ function appendAlbumInfo(artist,album,albumart){
 	var yearparagraf = createNewElement("h2",new Date(album["release_date"]).getFullYear())
 	var table = createNewElement("table")
 		table.className = "table"
+		var tbody = createNewElement("tbody")
+		table.appendChild(tbody)
+		var tr = createNewElement("tr")
+		tbody.appendChild(tr) 
+		
+		tr.appendChild(appendTo("tr",albumart , 12 ,6))
 
-		table.appendChild(appendTo("th",albumart , 6))
-
-		table.appendChild(appendTo("th",albumparagraf , 6))
+		tr.appendChild(appendTo("tr",albumparagraf , 12,6))
 		albumInfoDiv.appendChild(table)
 
 	return albumInfoDiv
 }
-function appendTo(type,data , bootstrapNum ){
+function appendTo(type,data , bootstrapNum ,secondaryBootstrapnum){
 
 
 	var element  = createNewElement(type)
@@ -330,6 +334,12 @@ function appendTo(type,data , bootstrapNum ){
 	if (bootstrapNum != null){
 		
 		element.className = "col-xs-" + bootstrapNum
+
+		if( secondaryBootstrapnum != undefined){
+
+			element.className += " col-md-" + secondaryBootstrapnum
+
+		}
 
 	}	
 	return element
