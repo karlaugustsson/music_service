@@ -1,2 +1,28 @@
+<script>
+	var searchField = document.getElementById("searchField")
+	searchField.value = ""
+	    var songplaying = findSongPlaying()
+    setTimeout(function(){
+   		updateSongPlaying(songplaying)
+ 	}, 100);
+    
+		if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) && screen.width < 600) {
+ 			var menu = document.getElementById("toggleMenu")
+			menu.className = "navbar-toggle collapsed collapse"
+		}
+</script>
+		
+<% if !check_if_touch() %>
+   
+   <% @eventclick = "ondblclick" %>
 
+
+<% else %>
+
+	<% @eventclick = "onclick" %>
+		
+<% end %>	
+<% @search = JSON.parse(@search)%>
+
+<%= render 'index', :locals => {:search => @search , :click => @eventclick}  %>
 

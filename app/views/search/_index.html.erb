@@ -1,5 +1,44 @@
+
 <div id="search-result">	
-<table id="searchResult" class= "table zebra-striped table-hover">
-	<tbody></tbody>
+<% if @search.count != 0  %>
+<% @counter = 0 %>
+<table id="searchResult" class="table zebra-striped table-hover">
+
+	
+		<th class="col-xs-4">Track</th>
+		<th class="col-xs-3">Artist</th>
+		<th class="col-xs-4">Album</th>
+		<th class="col-xs-1">Length</th>
+		
+		<% @search.each do |s| %>
+		<tbody>
+		<tr tabindex="1" id="song_id_<%= s['id'] %>">
+			
+			<td ondblclick="updatePlayListAndPlay(0)" >
+				<p <%= @eventclick%>="updatePlayListAndPlay(<%= @counter %>)"><%= s["name"]%></p>
+			</td>
+
+			<td >
+				<% s["album"]["music_groups"].each do |a|%>
+					<a data-remote="true" href="artists/<%= a["id"] %>/"><%= a["name"] %></a>
+				<% end %>
+			</td>
+
+			<td>
+				<a data-remote="true" href="albums/<%= s["album"]["id"] %>/"><%= s["album"]["name"]%></a>
+			</td>
+
+			<td><p><%= s['track_length']%></p></td>
+
+		</tr>
+
+		<% @counter = @counter + 1 %>
+	<% end %>
+
+</tbody>
 </table>
+
+<% else %>
+<p>No results were found </p>
+<% end %>
 </div>

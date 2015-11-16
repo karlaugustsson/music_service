@@ -1,6 +1,38 @@
+<% @counter = 0%>
 <div id="artist-info">
-	<h2></h2>
+	<h2><%= @artist[0]["album"]["music_groups"][0]["name"]%></h2>
 </div>
 <div id="album-list" class="clearfix">
-	<div id="result"></div>
+	<div id="result">
+		<% @artist.each do |a|%>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="albuminfo">
+						<div class="col-xs-12 col-md-2">
+							<a data-remote="true" href="albums/<%= a["id"]%>/" title="<%= a["album"]["name"]%>">
+							<img src="<%= a["album"]["full_path_album_art"]%>" alt="<%= a["album"]["name"]%>">
+							</a>
+						</div>
+						<div class="col-xs-12 col-md-10">
+							<a data-remote="true" href="albums/<%= a["id"]%>/"><%= a["album"]["name"]%></a>
+							<span>(<%= a["album"]["release_date"].to_time.strftime("%Y")%>)</span>
+						</div>
+					</div>
+					<table id="list" class="table zebra-striped table-condensed table-hover">
+						<th>#</th>
+						<th>name</th>
+						<th>length</th>
+						<tbody>
+							<tr tabindex="1" id="song_id_<%= a["id"]%>">
+								<td class="col-md-1"><p><%= a["position"]%></p></td>
+								<td class="col-md-9"  <%= @eventclick%>="updatePlayListAndPlay(<%= @counter %>)"> 
+									<p><%= a["name"] %> </p></td>
+								<td class="col-md-2"><p><%= a["track_length"] %></p></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		<% end %>
+	</div>
 </div>

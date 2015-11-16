@@ -1,8 +1,63 @@
+<% @counter = 0%>
 <div id="album-list" class="clearfix">
 	<div id="album-info">
+		<table class="table">
+			<div>
+									<div class="col-xs-12 col-md-3">
+						<img src="<%= @album[0]["album"]["full_path_album_art"]%>" alt="<%= @album[0]["album"]["name"]%>">
+					</div >
+					<div  class="col-xs-12 col-md-9">
+						<h2><%= @album[0]["album"]["name"]%></h2>
+						<ul>
+							<li>
+								<% @album[0]["album"]["music_groups"].each do |a|%>
+									<a href="artists/<%= a["id"]%>/" data-remote="true"><%= a["name"]%></a>
+								<% end %>
+							</li>
+							<li><%=pluralize(@album.count,"track")%></li>
+							<li><%= @album[0]["album"]["release_date"].to_time.strftime("%Y")%></li>
+						</ul>
+						
+					</div >
+			</div>
 		
-	</div>
 
-		
 
+		<table class="table zebra-striped table-hover">
+			<thead>
+			<th class="col-xs-1">#</th>
+			<th class="col-xs-10">Track</th>
+			<th class="col-xs-1">length</th>
+			</thead>
+			<tbody>
+				<% @album.each do |a|%>
+					<tr tabindex="1"  id="song_id_<%= a["id"]%>">
+						<td class="col-xs-4"><p><%= a["position"]%></p></td>
+						<td class="col-xs-4" ondblclick="updatePlayListAndPlay(<%= @counter %>)">
+							<p ondblclick="updatePlayListAndPlay(<%= @counter %>)"><%= a["name"]%></p>
+						</td>
+						<td class="col-xs-4">
+							<p><%= a["track_length"]%></p>
+						</td>
+					</tr>
+				<% end%>
+			</tbody>
+		</table>
+
+
+		<table class="table">
+			<tbody>
+				<tr>
+					<td class="col-xs-2">
+						<% @album[0]["album"]["labels"].each do |l|%>
+							<span> <%= l["label_name"]%></span>
+						<% end %>
+
+						<span><%= @album[0]["album"]["release_date"].to_time.strftime("%Y")%></span>
+					
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>	
 </div>

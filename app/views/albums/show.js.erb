@@ -1,11 +1,25 @@
 
 var albumResult = <%= h @album.html_safe %>
 	songlist = albumResult
+    var songplaying = findSongPlaying()
+    setTimeout(function(){
+   		updateSongPlaying(songplaying)
+ 	}, 100);
+    
+<% @album = JSON.parse(@album) %>
+<% if !check_if_touch() %>
+   
+   <% @eventclick = "ondblclick" %>
+
+
+<% else %>
+
+	<% @eventclick = "onclick" %>
+		
+<% end %>
 var main = document.getElementById("main")
 	main.innerHTML = ""
-	main.innerHTML = "<%= j render 'show' %>"
-
-	printAlbumResult()
+	main.innerHTML = "<%= j render 'show' , :partials => {:album => @album} %>"
 	
 
 

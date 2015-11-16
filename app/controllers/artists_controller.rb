@@ -5,7 +5,6 @@ class ArtistsController < ApplicationController
  
 
   	  @artist = open("#{@url}/v1/search_music_groups?id=#{params[:id]}").read
-  	
 
   	respond_to do |format|
   	format.js{@artist}

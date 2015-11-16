@@ -8,394 +8,405 @@ if(searchField.value.length == 0){
 }
 
 }
-function printSearchResult(){
-
-		if (searchResult.length == undefined || searchResult.length == 0){
-			var i = createNewElement("i","No results were found")
-			return i
-		}else{
-			return itterateSearchResult()
+function updateSongPlaying(id){
+	if(id != undefined){
+			var songplaying = document.getElementById("song_id_" + id)
+			console.log("song_id_" + id)
+		if(songplaying != undefined){
+			songplaying.className = "song-active"
 		}
-}
-function printAlbumResult(){
+	
+	}
 
-	return itterateAlbumResult()
 }
-function printArtistResult(){
-	var albums = []
-	var artisth2 = document.getElementById("artist-info").firstChild.nextSibling
-	var playingNow = findSongPlaying()
-	artisth2.innerHTML = artistResult[0]["album"]['music_groups'][0]["name"]
-	console.log(artisth2)
-for (var i =0 ; i < artistResult.length; i++) {
+// function printSearchResult(){
+
+// 		if (searchResult.length == undefined || searchResult.length == 0){
+// 			var i = createNewElement("i","No results were found")
+// 			return i
+// 		}else{
+// 			return itterateSearchResult()
+// 		}
+// }
+// function printAlbumResult(){
+
+// 	return itterateAlbumResult()
+// }
+// function printArtistResult(){
+// 	var albums = []
+// 	var artisth2 = document.getElementById("artist-info").firstChild.nextSibling
+// 	var playingNow = findSongPlaying()
+// 	artisth2.innerHTML = artistResult[0]["album"]['music_groups'][0]["name"]
+// 	console.log(artisth2)
+// for (var i =0 ; i < artistResult.length; i++) {
 	
 		
-	if(albums.indexOf(artistResult[i]["album"]["id"]) == -1){
-		albums.push(artistResult[i]["album"]["id"])
-	}
-}
+// 	if(albums.indexOf(artistResult[i]["album"]["id"]) == -1){
+// 		albums.push(artistResult[i]["album"]["id"])
+// 	}
+// }
 
-	for (var i =0 ; i < albums.length; i++) {
-			var table = createNewElement("table")
-			var albumdiv = createNewElement("div")
-				albumdiv.className = "col-md-12"
-			var row = createNewElement("div")
-			row.className="row"
-			row.appendChild(albumdiv)
+// 	for (var i =0 ; i < albums.length; i++) {
+// 			var table = createNewElement("table")
+// 			var albumdiv = createNewElement("div")
+// 				albumdiv.className = "col-md-12"
+// 			var row = createNewElement("div")
+// 			row.className="row"
+// 			row.appendChild(albumdiv)
 			
 
-			var tableHeaders = ["#" ,"name" , "length"]
-			var result = document.getElementById("result")
-			table = createTableHeaders(table,tableHeaders)
-			table.id = "list"
-			table.className = "table zebra-striped table-condensed table-hover"
-			var tbody = createNewElement("tbody")
-			table.appendChild(tbody)
+// 			var tableHeaders = ["#" ,"name" , "length"]
+// 			var result = document.getElementById("result")
+// 			table = createTableHeaders(table,tableHeaders)
+// 			table.id = "list"
+// 			table.className = "table zebra-striped table-condensed table-hover"
+// 			var tbody = createNewElement("tbody")
+// 			table.appendChild(tbody)
 		
-				var album  = artistResult.filter(function(obj){
+// 				var album  = artistResult.filter(function(obj){
 		
-						return obj["album"]["id"] == albums[i]
+// 						return obj["album"]["id"] == albums[i]
 					 
-				});
+// 				});
 			
 				
-				var albumInfo = createNewElement("div")
-					albumInfo.className = "albuminfo"
+// 				var albumInfo = createNewElement("div")
+// 					albumInfo.className = "albuminfo"
 
-					albumdiv.appendChild(albumInfo)
-					var albumYear = new Date(album[0]["album"]["release_date"]).getFullYear()
+// 					albumdiv.appendChild(albumInfo)
+// 					var albumYear = new Date(album[0]["album"]["release_date"]).getFullYear()
 				
-					var albumlink = createlink(album[0]["album"]["name"] ,"albums/"+ album[0]["album"]["id"] +"/")
-					var albumartLink = createlink("" ,"albums/"+ album[0]["album"]["id"] +"/")
-					var albumart = createImageTag(album[0]["album"]["full_path_album_art"],album[0]["album"]["name"],albumartLink)
+// 					var albumlink = createlink(album[0]["album"]["name"] ,"albums/"+ album[0]["album"]["id"] +"/")
+// 					var albumartLink = createlink("" ,"albums/"+ album[0]["album"]["id"] +"/")
+// 					var albumart = createImageTag(album[0]["album"]["full_path_album_art"],album[0]["album"]["name"],albumartLink)
 
-					var yearSpan = createNewElement("span" , "("+  albumYear +")")
+// 					var yearSpan = createNewElement("span" , "("+  albumYear +")")
 					
-					albumInfo.appendChild(albumart)
-					albumInfo.appendChild(albumlink)
-					albumInfo.appendChild(yearSpan)
+// 					albumInfo.appendChild(albumart)
+// 					albumInfo.appendChild(albumlink)
+// 					albumInfo.appendChild(yearSpan)
 					
 					
 
 			
-		for (var y = i ; y < artistResult.length; y++) {
+// 		for (var y = i ; y < artistResult.length; y++) {
 	
 			
 
-			if(albums[i] == artistResult[y]["album"]["id"]){
-				var tr = createNewElement("tr")
-				tr = appendAttribute(tr,"tabindex", "1")
-				tr = generatePlaylistClickEvent(tr,y)
-				tr.id = "song_id_" + artistResult[y]["id"]
-				if(playingNow != undefined && artistResult[y]["id"] == playingNow ){
-					tr.className = "song-active"
-				}
+// 			if(albums[i] == artistResult[y]["album"]["id"]){
+// 				var tr = createNewElement("tr")
+// 				tr = appendAttribute(tr,"tabindex", "1")
+// 				tr = generatePlaylistClickEvent(tr,y)
+// 				tr.id = "song_id_" + artistResult[y]["id"]
+// 				if(playingNow != undefined && artistResult[y]["id"] == playingNow ){
+// 					tr.className = "song-active"
+// 				}
 
-				var trackparagraf = createSongParagraf(y,artistResult[y]["name"])
+// 				var trackparagraf = createSongParagraf(y,artistResult[y]["name"])
 				
-				var tracklength = createNewElement("p",artistResult[y]["track_length"])
-				var position = createNewElement("p",artistResult[y]["position"])
-				tr.appendChild(appendTo("td",position))
-				tr.firstChild.className = "col-md-4"
-				tr.appendChild(appendTo("td",trackparagraf))
-				tr.firstChild.nextSibling.className = "col-md-4"
-				tr.appendChild(appendTo("td",tracklength))
-				tr.firstChild.nextSibling.nextSibling.className = "col-md-4"
-				tbody.appendChild(tr)
+// 				var tracklength = createNewElement("p",artistResult[y]["track_length"])
+// 				var position = createNewElement("p",artistResult[y]["position"])
+// 				tr.appendChild(appendTo("td",position))
+// 				tr.firstChild.className = "col-md-4"
+// 				tr.appendChild(appendTo("td",trackparagraf))
+// 				tr.firstChild.nextSibling.className = "col-md-4"
+// 				tr.appendChild(appendTo("td",tracklength))
+// 				tr.firstChild.nextSibling.nextSibling.className = "col-md-4"
+// 				tbody.appendChild(tr)
 	
-			}
+// 			}
 
 		
-		};
-		result.appendChild(row)
+// 		};
+// 		result.appendChild(row)
 	
-		albumdiv.appendChild(table)
+// 		albumdiv.appendChild(table)
 
-	};
-}
-	function itterateAlbumResult(){
-	var playingNow = findSongPlaying()
+// 	};
+// }
+// 	function itterateAlbumResult(){
+// 	var playingNow = findSongPlaying()
 
-	var artist = albumResult[0]["album"]["music_groups"][0]
-	var album = albumResult[0]["album"]
-	var albumart = albumResult[0]["album"]["full_path_album_art"]
-	var albumDiv = appendAlbumInfo(artist,album,albumart)
-	var resultdiv = document.getElementById("album-info")
+// 	var artist = albumResult[0]["album"]["music_groups"][0]
+// 	var album = albumResult[0]["album"]
+// 	var albumart = albumResult[0]["album"]["full_path_album_art"]
+// 	var albumDiv = appendAlbumInfo(artist,album,albumart)
+// 	var resultdiv = document.getElementById("album-info")
 
 
 	
-	var table = createNewElement("table")
-	table.className = "table zebra-striped table-hover"
+// 	var table = createNewElement("table")
+// 	table.className = "table zebra-striped table-hover"
 	
-	var tableHeader = ["#" , "Track" ,"length"]
-	var table = createTableHeaders(table,tableHeader , 4)
-	var tbody = createNewElement("tbody")
-	table.appendChild(tbody)
+// 	var tableHeader = ["#" , "Track" ,"length"]
+// 	var table = createTableHeaders(table,tableHeader , 4)
+// 	var tbody = createNewElement("tbody")
+// 	table.appendChild(tbody)
 		
 
 
 
-	for (var i = 0 ;  i < albumResult.length; i++) {
+// 	for (var i = 0 ;  i < albumResult.length; i++) {
 
-		var track = albumResult[i]['name']
+// 		var track = albumResult[i]['name']
 		
 		
 		
-		var artistId = albumResult[i]["album"]["music_groups"][0]["id"]
+// 		var artistId = albumResult[i]["album"]["music_groups"][0]["id"]
 		
 		
 		
-		var albumId = albumResult[i]["album"]["id"]
+// 		var albumId = albumResult[i]["album"]["id"]
 
-		var tracklength = albumResult[i]['track_length']
+// 		var tracklength = albumResult[i]['track_length']
 
-		var trackLengthParagraf = createNewElement("p",tracklength)
+// 		var trackLengthParagraf = createNewElement("p",tracklength)
 		
-		var trackparagraf = createSongParagraf(i,track)
+// 		var trackparagraf = createSongParagraf(i,track)
 
-		var trackpos = createNewElement("p" ,albumResult[i]["position"] )
+// 		var trackpos = createNewElement("p" ,albumResult[i]["position"] )
 
-		var artistlink = createlink(artist,"artists/"+ artistId +"/")
+// 		var artistlink = createlink(artist,"artists/"+ artistId +"/")
 	
 		
 
-		var tr = createNewElement("tr")
-		tr = appendAttribute(tr,"tabindex", "1")
-		tr = generatePlaylistClickEvent(tr,i)
-		tr.id = "song_id_" + albumResult[i]["id"]
+// 		var tr = createNewElement("tr")
+// 		tr = appendAttribute(tr,"tabindex", "1")
+// 		tr = generatePlaylistClickEvent(tr,i)
+// 		tr.id = "song_id_" + albumResult[i]["id"]
 
-		if(playingNow != undefined && albumResult[i]["id"] == playingNow ){
-			tr.className = "song-active"
-		}
-
-
+// 		if(playingNow != undefined && albumResult[i]["id"] == playingNow ){
+// 			tr.className = "song-active"
+// 		}
 
 
-		tr.appendChild(appendTo("td",trackpos , 4))
-		tr.appendChild(appendTo("td",trackparagraf , 4))
+
+
+// 		tr.appendChild(appendTo("td",trackpos , 4))
+// 		tr.appendChild(appendTo("td",trackparagraf , 4))
 		
-		tr.appendChild(appendTo("td",trackLengthParagraf , 4))
-		
-
-
-
-		tbody.appendChild(tr);
-		resultdiv.appendChild(table)
-
-	};
-	var table = createNewElement("table")
-	table.className = "table"
-	var tbody = createNewElement("tbody")
-	table.appendChild(tbody)
-	var albumInfoString = createNewElement("tr")
-
-
-	albumInfoString.appendChild(appendTo("td",createlink("Artist: " + artist["name"],"artists/"+ artist["id"] +"/"), 4))
-
-	var releaseDate = createNewElement("span"," " +  new Date(albumResult[0]["album"]["release_date"]).getFullYear())
-
-
-	for (var i = 0;  i < albumResult[0]["album"]["labels"].length ; i++) {
-		var label = albumResult[0]["album"]["labels"][i]["label_name"]
-		
-		albumInfoString.appendChild(appendTo("td",createNewElement("span" , " " + label), 4))
+// 		tr.appendChild(appendTo("td",trackLengthParagraf , 4))
 		
 
-		if(i == albumResult[0]["album"]["labels"].length - 1){
+
+
+// 		tbody.appendChild(tr);
+// 		resultdiv.appendChild(table)
+
+// 	};
+// 	var table = createNewElement("table")
+// 	table.className = "table"
+// 	var tbody = createNewElement("tbody")
+// 	table.appendChild(tbody)
+// 	var albumInfoString = createNewElement("tr")
+
+
+// 	albumInfoString.appendChild(appendTo("td",createlink("Artist: " + artist["name"],"artists/"+ artist["id"] +"/"), 4))
+
+// 	var releaseDate = createNewElement("span"," " +  new Date(albumResult[0]["album"]["release_date"]).getFullYear())
+
+
+// 	for (var i = 0;  i < albumResult[0]["album"]["labels"].length ; i++) {
+// 		var label = albumResult[0]["album"]["labels"][i]["label_name"]
+		
+// 		albumInfoString.appendChild(appendTo("td",createNewElement("span" , " " + label), 4))
+		
+
+// 		if(i == albumResult[0]["album"]["labels"].length - 1){
 			
-			albumInfoString.appendChild(appendTo("td",releaseDate, 4))
+// 			albumInfoString.appendChild(appendTo("td",releaseDate, 4))
 			
 		
-		}
+// 		}
 	
-	};
+// 	};
 
 
 
-	tbody.appendChild(albumInfoString)
+// 	tbody.appendChild(albumInfoString)
 
-	resultdiv.appendChild(table)
+// 	resultdiv.appendChild(table)
 
-}
-function itterateSearchResult(){
+// }
+// function itterateSearchResult(){
 
-	var playingNow = findSongPlaying()
+// 	var playingNow = findSongPlaying()
 
-	var tableHeader = ["Track" , "Artist" , "Album"]
+// 	var tableHeader = ["Track" , "Artist" , "Album"]
 	
-	var table = document.getElementById("searchResult")
-		table = createTableHeaders(table,tableHeader)
-		var tbody = createNewElement("tbody")
-		table.appendChild(tbody)
-	
-
-for (var i = 0 ;  i < searchResult.length; i++) {
-		var track = searchResult[i]['name']
-		
-		var artist = searchResult[i]["album"]["music_groups"][0]["name"]
-		
-		var artistId = searchResult[i]["album"]["music_groups"][0]["id"]
-		
-		var album = searchResult[i]["album"]["name"]
-		
-		var albumId = searchResult[i]["album"]["id"]
-
-		var tr = createNewElement("tr")
-
-		tr = appendAttribute(tr,"tabindex", "1")
-
-		tr = generatePlaylistClickEvent(tr,i)
-
-		tr.id = "song_id_" + searchResult[i]["id"]
-
-		if(playingNow != undefined && searchResult[i]["id"] == playingNow ){
-			tr.className = "song-active"
-		}
-
-		var trackparagraf = createSongParagraf(i,track)
+// 	var table = document.getElementById("searchResult")
+// 		table = createTableHeaders(table,tableHeader)
+// 		var tbody = createNewElement("tbody")
+// 		table.appendChild(tbody)
 	
 
-		var artistlink = createlink(artist,"artists/"+ artistId +"/")
+// for (var i = 0 ;  i < searchResult.length; i++) {
+// 		var track = searchResult[i]['name']
+		
+// 		var artist = searchResult[i]["album"]["music_groups"][0]["name"]
+		
+// 		var artistId = searchResult[i]["album"]["music_groups"][0]["id"]
+		
+// 		var album = searchResult[i]["album"]["name"]
+		
+// 		var albumId = searchResult[i]["album"]["id"]
+
+// 		var tr = createNewElement("tr")
+
+// 		tr = appendAttribute(tr,"tabindex", "1")
+
+// 		tr = generatePlaylistClickEvent(tr,i)
+
+// 		tr.id = "song_id_" + searchResult[i]["id"]
+
+// 		if(playingNow != undefined && searchResult[i]["id"] == playingNow ){
+// 			tr.className = "song-active"
+// 		}
+
+// 		var trackparagraf = createSongParagraf(i,track)
+	
+
+// 		var artistlink = createlink(artist,"artists/"+ artistId +"/")
 
 		
-		var albumlink = createlink(album,"albums/"+ albumId +"/")
+// 		var albumlink = createlink(album,"albums/"+ albumId +"/")
 			
 	
-		tr.appendChild(appendTo("td",trackparagraf))
+// 		tr.appendChild(appendTo("td",trackparagraf))
 		
-		tr.appendChild(appendTo("td",artistlink))
+// 		tr.appendChild(appendTo("td",artistlink))
 		
-		tr.appendChild(appendTo("td",albumlink))
+// 		tr.appendChild(appendTo("td",albumlink))
 
 
-		tbody.appendChild(tr);
+// 		tbody.appendChild(tr);
 	
-}
+// }
 
-	return table 
-}
+// 	return table 
+// }
 
-function createlink(subject,path){
-	var subjectlink = createNewElement("a",subject)
-	var dataremotelink = appendAttribute(subjectlink,"data-remote","true")
-		subjectlink.href = path 
+// function createlink(subject,path){
+// 	var subjectlink = createNewElement("a",subject)
+// 	var dataremotelink = appendAttribute(subjectlink,"data-remote","true")
+// 		subjectlink.href = path 
 
-	return subjectlink
+// 	return subjectlink
 
-}
-function createSongParagraf(id,song){
-	var p = createNewElement("p",song)
-	 p = generatePlaylistClickEvent(p,id)
+// }
+// function createSongParagraf(id,song){
+// 	var p = createNewElement("p",song)
+// 	 p = generatePlaylistClickEvent(p,id)
 
-	return p
-}
+// 	return p
+// }
 
-function generatePlaylistClickEvent(node, id){
+// function generatePlaylistClickEvent(node, id){
 
-	if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Silk|Opera Mini/i.test(navigator.userAgent) ) {
- 		var eventclick = "onclick"
-	}else{
-		var eventclick = "ondblclick"
-	}
+// 	if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Silk|Opera Mini/i.test(navigator.userAgent) ) {
+//  		var eventclick = "onclick"
+// 	}else{
+// 		var eventclick = "ondblclick"
+// 	}
 
-	return appendAttribute(node,eventclick,"updatePlayListAndPlay(" + id + ")")
-}
-function appendAlbumInfo(artist,album,albumart){
-	var albumInfoDiv = document.getElementById("album-info")
+// 	return appendAttribute(node,eventclick,"updatePlayListAndPlay(" + id + ")")
+// }
+// function appendAlbumInfo(artist,album,albumart){
+// 	var albumInfoDiv = document.getElementById("album-info")
 	
-	var albumart = createImageTag(albumart,album)
-		albumart.height = 200
+// 	var albumart = createImageTag(albumart,album)
+// 		albumart.height = 200
 	
-	// var artistparagraf = createNewElement("h2",artist["name"] )
+// 	// var artistparagraf = createNewElement("h2",artist["name"] )
 
 	 
-	var albumparagraf = createNewElement("h2", album["name"])
+// 	var albumparagraf = createNewElement("h2", album["name"])
 
-	var yearparagraf = createNewElement("h2",new Date(album["release_date"]).getFullYear())
-	var table = createNewElement("table")
-		table.className = "table"
-		var tbody = createNewElement("tbody")
-		table.appendChild(tbody)
-		var tr = createNewElement("tr")
-		tbody.appendChild(tr) 
+// 	var yearparagraf = createNewElement("h2",new Date(album["release_date"]).getFullYear())
+// 	var table = createNewElement("table")
+// 		table.className = "table"
+// 		var tbody = createNewElement("tbody")
+// 		table.appendChild(tbody)
+// 		var tr = createNewElement("tr")
+// 		tbody.appendChild(tr) 
 		
-		tr.appendChild(appendTo("tr",albumart , 12 , 6))
+// 		tr.appendChild(appendTo("tr",albumart , 12 , 6))
 
-		tr.appendChild(appendTo("tr",albumparagraf , 12 , 6))
-		albumInfoDiv.appendChild(table)
+// 		tr.appendChild(appendTo("tr",albumparagraf , 12 , 6))
+// 		albumInfoDiv.appendChild(table)
 
-	return albumInfoDiv
-}
+// 	return albumInfoDiv
+// }
 
-function appendTo(type,data , bootstrapNum ,secondaryBootstrapnum){
+// function appendTo(type,data , bootstrapNum ,secondaryBootstrapnum){
 
 
-	var element  = createNewElement(type)
-		element.appendChild(data)
-	if (bootstrapNum != null){
+// 	var element  = createNewElement(type)
+// 		element.appendChild(data)
+// 	if (bootstrapNum != null){
 		
-		element.className = "col-xs-" + bootstrapNum
+// 		element.className = "col-xs-" + bootstrapNum
 
-		if(secondaryBootstrapnum != undefined){
+// 		if(secondaryBootstrapnum != undefined){
 
-			element.className += " col-md-" + secondaryBootstrapnum
+// 			element.className += " col-md-" + secondaryBootstrapnum
 
-		}
+// 		}
 
-	}	
-	return element
-}
-function createNewElement(element,value){
-	var newElement = document.createElement(element)
+// 	}	
+// 	return element
+// }
+// function createNewElement(element,value){
+// 	var newElement = document.createElement(element)
 	
-	if(value === undefined){
-		newElement.innerHTML = ""
-	}else{
-		newElement.innerHTML = value
-	}
-	return newElement
+// 	if(value === undefined){
+// 		newElement.innerHTML = ""
+// 	}else{
+// 		newElement.innerHTML = value
+// 	}
+// 	return newElement
 	
-}
-function createTableHeaders(table,header  , bootstrapNum){
+// }
+// function createTableHeaders(table,header  , bootstrapNum){
 	
 		
 	
-	for (var i = 0; i < header.length;i++) {
-		var h = createNewElement("th")
-		if(bootstrapNum != undefined){
-			h.className = "col-xs-" + bootstrapNum
-		}
-		h.innerHTML += header[i];
+// 	for (var i = 0; i < header.length;i++) {
+// 		var h = createNewElement("th")
+// 		if(bootstrapNum != undefined){
+// 			h.className = "col-xs-" + bootstrapNum
+// 		}
+// 		h.innerHTML += header[i];
 		
-		table.appendChild(h)
-	}
+// 		table.appendChild(h)
+// 	}
 
-	return table
-}
+// 	return table
+// }
 
 
-function appendAttribute(subject,attribute,value){
-	var newAttribute = document.createAttribute(attribute)
+// function appendAttribute(subject,attribute,value){
+// 	var newAttribute = document.createAttribute(attribute)
 
-	newAttribute.value = value
+// 	newAttribute.value = value
 	
-	subject.setAttributeNode(newAttribute)
-	return subject
+// 	subject.setAttributeNode(newAttribute)
+// 	return subject
 
-}
-function createImageTag(source,text,a){
+// }
+// function createImageTag(source,text,a){
 
-	var img = createNewElement("img")
-	img.src = source
-	img.alt = text
-	if(a === undefined){
-		return img
-	}
-	a.title = text
-	a.appendChild(img)
+// 	var img = createNewElement("img")
+// 	img.src = source
+// 	img.alt = text
+// 	if(a === undefined){
+// 		return img
+// 	}
+// 	a.title = text
+// 	a.appendChild(img)
 	
-	return a
-}
+// 	return a
+// }
 
 function findSongPlaying(){
 	if(songPlaying == undefined){

@@ -1,3 +1,5 @@
+require 'open-uri'
+require 'json'
 class PublicController < ApplicationController
 	layout "music"
 	before_action :redirect_if_not_logged_in ,:only => :main

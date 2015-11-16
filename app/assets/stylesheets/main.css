@@ -23,6 +23,18 @@ html, body{
 #album-info{
 	width: 70%;
 }
+#album-info li {
+	float :left;
+	margin-right:10px;
+	list-style: none;
+}
+#album-info a {
+	color: black;
+}
+#album-info ul {
+	padding:0;
+	margin:0;
+}
 #album-info th h2{
 	margin-left :10%;
 }
@@ -53,9 +65,9 @@ html, body{
 #result{
 	width: 100%;
 }
-.table-hover tbody tr:hover td ,  .table-hover tbody tr:hover th{
+.table-hover tbody tr:hover td {
   background-color: #FF751A;
-  color: red;
+  color: white;
   cursor: pointer;
 
   

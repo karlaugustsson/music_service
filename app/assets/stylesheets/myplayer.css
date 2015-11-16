@@ -5,6 +5,10 @@
   float: left;
 
 }
+#album-info img{
+  width:200px;
+  height: 200px;
+}
 #hideshowplayer{
 display: none;
 }
@@ -233,9 +237,10 @@ input[type=range]:focus::-ms-fill-upper {
   height:80%;
 }
 #album-info img{
-  width:100px;
-  height: 100px;
+  width:100%;
+  height: auto;
 }
+
 .overflow-hide{
   overflow:scroll;
 }
@@ -284,6 +289,11 @@ width:100%;
 
 .collapse{
   display: none;
+}
+.albuminfo img {
+    height:auto;
+  
+    width:100%;
 }
 
 }

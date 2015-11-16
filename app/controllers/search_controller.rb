@@ -4,6 +4,7 @@ class SearchController < ApplicationController
 	layout "music"
 	skip_before_filter :verify_authenticity_token
   before_action :redirect_if_not_logged_in
+  before_action :set_logged_in_user
   before_action :set_environment_url
 
   def index
@@ -47,10 +48,11 @@ class SearchController < ApplicationController
 
   	end
 
-  		  	respond_to do |format|
+   
+  	respond_to do |format|
 	 		
-	  		format.js {@search}
-	  		format.html
+	  format.js {@search}
+	  format.html{redirect_to("/")}
 
 	  	end
 
