@@ -4,7 +4,7 @@ var songlist = <%= h @artist.html_safe %>
     var songplaying = findSongPlaying()
     setTimeout(function(){
    		updateSongPlaying(songplaying)
- 	}, 500);
+ 	}, 300);
     
 
 if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) && screen.width < 600) {

@@ -33,13 +33,14 @@
 				<% @album.each do |a|%>
 					<tr tabindex="1"  id="song_id_<%= a["id"]%>">
 						<td class="col-xs-4"><p><%= a["position"]%></p></td>
-						<td class="col-xs-4" ondblclick="updatePlayListAndPlay(<%= @counter %>)">
-							<p ondblclick="updatePlayListAndPlay(<%= @counter %>)"><%= a["name"]%></p>
+						<td class="col-xs-4" <%=@eventclick%>="updatePlayListAndPlay(<%= @counter %>)">
+							<p <%=@eventclick%>="updatePlayListAndPlay(<%= @counter %>)"><%= a["name"]%></p>
 						</td>
 						<td class="col-xs-4">
 							<p><%= a["track_length"]%></p>
 						</td>
 					</tr>
+					<% @counter = @counter + 1%>
 				<% end%>
 			</tbody>
 		</table>

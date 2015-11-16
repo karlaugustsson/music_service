@@ -4,7 +4,7 @@ var albumResult = <%= h @album.html_safe %>
     var songplaying = findSongPlaying()
     setTimeout(function(){
    		updateSongPlaying(songplaying)
- 	}, 500);
+ 	}, 300);
     
 <% @album = JSON.parse(@album) %>
 <% if !check_if_touch() %>
