@@ -9,5 +9,14 @@ class PublicController < ApplicationController
 		@index = "fox"
 	end
 	def main
-end
+		@latest = open("#{@url}/v1/search_albums?latest_release=").read
+
+  		  	respond_to do |format|
+	 		
+	  		format.js {@latest = JSON.parse(@latest)}
+	  		format.html {@latest = JSON.parse(@latest) }
+
+	  	end
+
+	end
 end

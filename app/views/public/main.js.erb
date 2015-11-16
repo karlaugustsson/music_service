@@ -1,0 +1,4 @@
+var main = document.getElementById("main")
+	main.innerHTML = ""
+	main.innerHTML = "<%= j render 'main', :locals => {:latest => @latest} %>"
+	printArtistResult()

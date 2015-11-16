@@ -1,0 +1,35 @@
+
+<div id="publicNews">
+	
+<% if @latest.count != 0 %>
+	<h2> latest albums on musicservice</h2>
+	<table id="latestAlbums" class="table zebra-striped">
+		<tbody>
+		<tr>
+			<% @latest.each do |album|%>
+				<td class="col-xs-1">
+					<a href="/albums/<%= album["id"] %>" data-remote="true">
+						<img src="<%= album["full_path_album_art"] %>" alt="<%= album["name"] %>" >
+						<p><%= album["name"] %></p>
+					</a>	
+				</td>
+			<% end %>
+			<% if !@latest.blank? %>
+			<% @counter = @latest.count %>
+			  <% while @counter != 5  %>
+			    <td class="col-xs-1">
+			    </td>
+			    <% @counter = @counter + 1%>
+			  <% end %>
+
+			  
+			<% end %>
+
+
+		</tr>
+		</tbody>
+	</table>
+	<% else %>
+	<p>No albums on this service we screwed up , back your bags and get the fuck out of here </p>
+<% end  %>
+</div>
