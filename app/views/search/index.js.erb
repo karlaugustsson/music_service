@@ -1,7 +1,7 @@
     var songplaying = findSongPlaying()
     setTimeout(function(){
    		updateSongPlaying(songplaying)
- 	}, 100);
+ 	}, 500);
 	var songlist = <%= h @search.html_safe %>
 	var searchField = document.getElementById("searchField")
 	searchField.value = ""
