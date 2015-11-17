@@ -4,14 +4,11 @@ module ApplicationHelper
 		render(:partial => "application/error_messages" , :locals => {:object => object})
 	end
 	def check_if_touch()
-		@touch = ["android","webos","safari","iphone","ipad","ipod","blackberry","iemobile","opera mini/i"]
-		@browser = users_browser()
-		puts @browser
-		unless @touch.include?(@browser)
-			return false
-		else
-			return true
-		end
+		 if request.env["HTTP_USER_AGENT"] && request.env["HTTP_USER_AGENT"][/(iPhone|iPad|iPod|Silk|Opera Mini|BlackBerry|AppleWebKit|Android)/]
+		 	return true
+		 else
+		 	return false
+		 end
 	end
 
 
