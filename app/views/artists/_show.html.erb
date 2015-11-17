@@ -39,7 +39,7 @@
 								<td class="col-md-2"><p><%= a["track_length"] %></p></td>
 							</tr>
 			<% else %>
-										<tr tabindex="1" id="song_id_<%= a["id"]%>">
+							<tr tabindex="1" id="song_id_<%= a["id"]%>">
 								<td class="col-md-1"><p><%= a["position"]%></p></td>
 								<td class="col-md-9"  <%= @eventclick%>="updatePlayListAndPlay(<%= @counter %>)"> 
 									<p><%= a["name"] %> </p>
@@ -47,17 +47,19 @@
 								<td class="col-md-2"><p><%= a["track_length"] %></p></td>
 							</tr>
 			<% end %>
+
+			<% @counter = @counter + 1%>
+
+			<% if @counter != @numberOfTracks %>
+				<% @nextTrack = @artist[@counter]["album"]["id"]%>
+			<% end %>
+		
 			<% if @nextTrack != a["album"]["id"] %>
 						</tbody>
 					</table>
 				</div>
 	
 			</div>
-			<% end %>
-			<% @counter = @counter + 1%>
-
-			<% if @counter != @numberOfTracks %>
-				<% @nextTrack = @artist[@counter]["album"]["id"]%>
 			<% end %>
 
 		<% end %>
