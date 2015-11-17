@@ -1,15 +1,17 @@
 <% @counter = 0%>
-<% @currentAlbum = "" %>
+<% @albums = [] %>
+<% @nextTrack = "" %>
+<% @numberOfTracks = @artist.count %>
+
 <div id="artist-info">
 	<h2><%= @artist[0]["album"]["music_groups"][0]["name"]%></h2>
 </div>
 <div id="album-list" class="clearfix">
 	<div id="result">
 		<% @artist.each do |a|%>
-
-			<div class="row">
-				<% if @currentAlbum != a["album"]%>
-					<% @currentAlbum = a["album"]%>
+			<% if !@albums.include? a["album"]["id"] %>
+			<%@albums.push(a["album"]["id"])%>
+						<div class="row">
 					<div class="col-md-12">
 						<div class="albuminfo">
 							<div class="col-xs-12 col-md-2">
@@ -27,7 +29,6 @@
 							<th>name</th>
 							<th>length</th>
 							<tbody>
-				<% end %>
 
 
 							<tr tabindex="1" id="song_id_<%= a["id"]%>">
@@ -37,16 +38,28 @@
 								</td>
 								<td class="col-md-2"><p><%= a["track_length"] %></p></td>
 							</tr>
-
-		<% if @currentAlbum != a["album"]%>
-
+			<% else %>
+										<tr tabindex="1" id="song_id_<%= a["id"]%>">
+								<td class="col-md-1"><p><%= a["position"]%></p></td>
+								<td class="col-md-9"  <%= @eventclick%>="updatePlayListAndPlay(<%= @counter %>)"> 
+									<p><%= a["name"] %> </p>
+								</td>
+								<td class="col-md-2"><p><%= a["track_length"] %></p></td>
+							</tr>
+			<% end %>
+			<% if @nextTrack != a["album"]["id"] %>
 						</tbody>
 					</table>
 				</div>
-
-		<% end %>		
+	
 			</div>
+			<% end %>
 			<% @counter = @counter + 1%>
+
+			<% if @counter != @numberOfTracks %>
+				<% @nextTrack = @artist[@counter]["album"]["id"]%>
+			<% end %>
+
 		<% end %>
 	</div>
 </div>
