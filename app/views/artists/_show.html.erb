@@ -15,12 +15,12 @@
 					<div class="col-md-12">
 						<div class="albuminfo">
 							<div class="col-xs-12 col-md-2">
-								<a data-remote="true" href="albums/<%= a["id"]%>/" title="<%= a["album"]["name"]%>">
+								<a data-remote="true" href="albums/<%= a["album"]["id"]%>/" title="<%= a["album"]["name"]%>">
 								<img src="<%= a["album"]["full_path_album_art"]%>" alt="<%= a["album"]["name"]%>">
 								</a>
 							</div>
 							<div class="col-xs-12 col-md-10">
-								<a data-remote="true" href="albums/<%= a["id"]%>/"><%= a["album"]["name"]%></a>
+								<a data-remote="true" href="albums/<%= a["album"]["id"]%>/"><%= a["album"]["name"]%></a>
 								<span>(<%= a["album"]["release_date"].to_time.strftime("%Y")%>)</span>
 							</div>
 						</div>
@@ -53,7 +53,7 @@
 			<% if @counter != @numberOfTracks %>
 				<% @nextTrack = @artist[@counter]["album"]["id"]%>
 			<% end %>
-		
+
 			<% if @nextTrack != a["album"]["id"] %>
 						</tbody>
 					</table>

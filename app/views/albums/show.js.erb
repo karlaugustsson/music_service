@@ -4,6 +4,8 @@ var albumResult = <%= h @album.html_safe %>
     var songplaying = findSongPlaying()
     setTimeout(function(){
    		updateSongPlaying(songplaying)
+   		   		var main = document.getElementById("main")
+		main.scrollIntoView()
  	}, 300);
     
 <% @album = JSON.parse(@album) %>
