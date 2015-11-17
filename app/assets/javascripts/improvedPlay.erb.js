@@ -176,13 +176,14 @@ function insertMeta(audio,id){
 	var artistId = queuesonglist[id]["id"]
 	var songinfo = document.getElementById("songinfo")
 	var track = queuesonglist[id]["music_file_file_name"] + new Date().getTime()
-	
+	var track2 = queuesonglist[id]["oggpath"] + new Date().getTime()
 	var type = queuesonglist[id]["music_file_content_type"]
 
 
 	var source = document.getElementById("source");
-
+	var source2 = document.getElementById("source2");
 	source.setAttribute("src",track);
+	source2.setAttribute("src",track2);
 	updateResultWithColor(artistId)
 	source.type = type
 	if(!document.getElementById("album_art_image_tag")){
