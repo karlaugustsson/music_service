@@ -25,12 +25,14 @@
 							</div>
 						</div>
 						<table id="list" class="table zebra-striped table-condensed table-hover">
+							<thead>
 							<th>#</th>
 							<th>name</th>
 							<th>length</th>
+							</thead>
 							<tbody>
 
-
+							
 							<tr tabindex="1" id="song_id_<%= a["id"]%>">
 								<td class="col-md-1"><p><%= a["position"]%></p></td>
 								<td class="col-md-9"  <%= @eventclick%>="updatePlayListAndPlay(<%= @counter %>)"> 
