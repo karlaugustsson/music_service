@@ -14,7 +14,7 @@
  += require 'main.css'
  += require 'myplayer.css'
  += require 'public.css'
-
+ += require 'search.scss'
  *= require_tree .
  *= require_self
  */
